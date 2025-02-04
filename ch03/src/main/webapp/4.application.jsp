@@ -18,14 +18,14 @@
 <body>
 	<h3>4.application 내장객체</h3>
 	
-	<h4>서버정보</h4>
+	<h4>서버 정보</h4>
 	<p>
 		WAS 정보 : <%= application.getServerInfo() %><br>
 		Servlet 버전 : <%= application.getMajorVersion() %>.<%= application.getMinorVersion() %><br>
 		JSP 버전 : <%= JspFactory.getDefaultFactory().getEngineInfo().getSpecificationVersion() %><br>
 	</p>
 	
-	<h4>환경정보</h4>
+	<h4>환경 정보</h4>
 	<%
 		// 애플리케이션이 WAS에 초기화(최초 실행) 될때 Context 환경정보 반영
 		String param1 = application.getInitParameter("PARAM1");
@@ -36,7 +36,7 @@
 		param2 : <%= param2 %><br>
 	</p>
 	
-	<h4>자원경로</h4>
+	<h4>자원 경로</h4>
 	<%= application.getRealPath("./4.application.jsp") %>
 	
 </body>
