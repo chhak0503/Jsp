@@ -5,9 +5,6 @@
 <%
 	// 데이터 수신
 	String uid = request.getParameter("uid");
-	String name = request.getParameter("name");
-	String hp = request.getParameter("hp");
-	String age = request.getParameter("age");
 	
 	// 데이터베이스 처리
 	String host = "jdbc:mysql://127.0.0.1:3306/studydb";
@@ -18,12 +15,9 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(host, user, pass);
 		
-		String sql = "UPDATE `user1` SET `name`=?, `hp`=?, `age`=? WHERE `uid`=?";
+		String sql = "DELETE FROM `user1` WHERE `uid`=?";
 		PreparedStatement psmt = conn.prepareStatement(sql);
-		psmt.setString(1, name);
-		psmt.setString(2, hp);
-		psmt.setString(3, age);
-		psmt.setString(4, uid);
+		psmt.setString(1, uid);
 		
 		psmt.executeUpdate();
 

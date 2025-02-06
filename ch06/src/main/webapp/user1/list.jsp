@@ -65,7 +65,7 @@
 			<td><%= user1.getAge() %></td>
 			<td>
 				<a href="./modify.jsp?uid=<%= user1.getUid() %>">수정</a>
-				<a href="#">삭제</a>
+				<a href="./proc/delete.jsp?uid=<%= user1.getUid() %>">삭제</a>
 			</td>
 		</tr>
 		<% } %>		
