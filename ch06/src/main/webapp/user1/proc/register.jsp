@@ -30,7 +30,7 @@
 		psmt.setString(4, age);
 				
 		// 4단계 - SQL 실행
-		psmt.executeUpdate();		
+		psmt.executeUpdate();
 		
 		// 5단계 - 결과셋 처리(SELECT 경우)
 		// 6단계 - 데이터베이스 종료
