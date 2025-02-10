@@ -1,3 +1,5 @@
+<%@page import="java.nio.charset.Charset"%>
+<%@page import="java.util.UUID"%>
 <%@page import="java.nio.file.Path"%>
 <%@page import="org.apache.commons.fileupload2.core.FileItem"%>
 <%@page import="org.apache.commons.fileupload2.jakarta.servlet6.JakartaServletFileUpload"%>
@@ -29,13 +31,32 @@
 		List<FileItem> items = upload.parseRequest(request);
 		Iterator<FileItem> iter = items.iterator();
 		
+		// 폼 입력 필드 갯수만큼 반복
 		while(iter.hasNext()){
 			
 			FileItem item = iter.next();
 			
-			// 파일 저장
-			//File uploadFile = new File(uploadPath + File.separator + item.getFieldName());
-			item.write(Path.of(uploadPath, "test.txt"));
+			if(item.isFormField()){ // 일반 텍스트 데이터
+				
+				String fieldName  = item.getFieldName();
+				String fieldValue = item.getString(Charset.forName("UTF-8"));
+				
+				System.out.println("fieldName : " + fieldName);
+				System.out.println("fieldValue : " + fieldValue);
+				
+			} else { // 첨부파일(파일 입력 필드)
+				
+				// 확장자 추출
+				String fileName = item.getName();
+				int idx = fileName.lastIndexOf(".");
+				String ext = fileName.substring(idx);
+				
+				// 랜덤 파일명 생성
+				String savedFileName = UUID.randomUUID().toString() + ext;
+								
+				// 파일 저장
+				item.write(Path.of(uploadPath, savedFileName));
+			}
 		}
 		
 	}catch(Exception e){
