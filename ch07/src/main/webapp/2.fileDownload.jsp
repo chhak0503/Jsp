@@ -68,8 +68,8 @@
 			<td><%= file.getoName() %></td>
 			<td><%= file.getsName() %></td>
 			<td>
-				<a href="#">삭제</a>
-				<a href="#">다운로드</a>
+				<a href="./proc/fileDelete.jsp">삭제</a>
+				<a href="./proc/fileDownload.jsp?seq=<%= file.getSeq() %>">다운로드</a>
 			</td>
 		</tr>
 		<% } %>
