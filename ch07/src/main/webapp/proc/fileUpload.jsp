@@ -1,14 +1,20 @@
-<%@page import="org.apache.commons.fileupload2.core.DiskFileItem"%>
-<%@page import="java.nio.charset.Charset"%>
+<%@page import="entity.FileEntity"%>
+<%@page import="java.io.File"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="javax.naming.Context"%>
 <%@page import="java.util.UUID"%>
+<%@page import="java.nio.charset.Charset"%>
 <%@page import="java.nio.file.Path"%>
 <%@page import="org.apache.commons.fileupload2.core.FileItem"%>
+<%@page import="org.apache.commons.fileupload2.core.DiskFileItem"%>
 <%@page import="org.apache.commons.fileupload2.jakarta.servlet6.JakartaServletFileUpload"%>
 <%@page import="org.apache.commons.fileupload2.core.DiskFileItemFactory"%>
 <%@page import="org.apache.commons.fileupload2.core.FileItemFactory"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-<%@page import="java.io.File"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	// 파일 업로드 디렉터리 경로 설정
@@ -26,6 +32,9 @@
 	
 	// 최대 업로드 파일 크기 설정
 	upload.setSizeMax(1024 * 1024 * 10); // 10MB
+	
+	// 파일 엔티티 생성
+	FileEntity file = new FileEntity();
 	
 	// 파일 업로드 스트림 작업
 	try {
@@ -45,6 +54,13 @@
 				System.out.println("fieldName : " + fieldName);
 				System.out.println("fieldValue : " + fieldValue);
 				
+				// 엔티티 초기화
+				if(fieldName.equals("title")){
+					file.setTitle(fieldValue);
+				}else if(fieldName.equals("name")){
+					file.setName(fieldValue);
+				}
+				
 			} else { // 첨부파일(파일 입력 필드)
 				
 				// 확장자 추출
@@ -54,6 +70,10 @@
 				
 				// 랜덤 파일명 생성
 				String savedFileName = UUID.randomUUID().toString() + ext;
+				
+				// 엔티티 초기화
+				file.setoName(fileName);
+				file.setsName(savedFileName);
 								
 				// 파일 저장
 				item.write(Path.of(uploadPath, savedFileName));
@@ -63,9 +83,30 @@
 		e.printStackTrace();
 	}
 	
+	System.out.println(file);	
+	
 	// 데이터베이스 처리
-	
-	
+	try {
+		Context initCtx = new InitialContext();
+		Context ctx = (Context) initCtx.lookup("java:comp/env");
+		DataSource ds = (DataSource) ctx.lookup("jdbc/studydb");
+		
+		Connection conn = ds.getConnection();
+		
+		String sql = "insert into `file` (`title`, `name`, `oName`, `sName`) values (?,?,?,?)";
+		PreparedStatement psmt = conn.prepareStatement(sql);
+		psmt.setString(1, file.getTitle());
+		psmt.setString(2, file.getName());
+		psmt.setString(3, file.getoName());
+		psmt.setString(4, file.getsName());
+		
+		psmt.executeUpdate();
+		psmt.close();
+		conn.close();
+		
+	}catch(Exception e){
+		e.printStackTrace();
+	}
 	
 	// 다운로드 페이지 이동
 	response.sendRedirect("../2.fileDownload.jsp");
