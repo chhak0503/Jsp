@@ -101,9 +101,9 @@
 		psmt.setString(4, file.getsName());
 		
 		psmt.executeUpdate();
-		psmt.close();
-		conn.close();
 		
+		psmt.close();
+		conn.close();	
 	}catch(Exception e){
 		e.printStackTrace();
 	}
