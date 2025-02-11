@@ -30,6 +30,10 @@
 		PreparedStatement psmt = conn.prepareStatement(sql);
 		psmt.setString(1, seq);
 		
+		String deleteSql = "delete from `file` where `seq`=?";
+		PreparedStatement psmtDelete = conn.prepareStatement(deleteSql);
+		psmtDelete.setString(1, seq);
+		
 		ResultSet rs = psmt.executeQuery();
 		
 		if(rs.next()){
@@ -40,6 +44,10 @@
 			file.setoName(rs.getString(4));
 			file.setsName(rs.getString(5));
 		}
+		
+		psmtDelete.executeUpdate();
+		psmtDelete.close();		
+		
 		rs.close();
 		psmt.close();
 		conn.close();
@@ -47,30 +55,14 @@
 		e.printStackTrace();
 	}
 	
-	// response 파일 다운로드 헤더 정보
-	response.setContentType("application/octet-stream");
-	response.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(file.getoName(), "utf-8"));
-	response.setHeader("Content-Transfer-Encoding", "binary");
-	response.setHeader("Pragma", "no-cache");
-	response.setHeader("Cache-Control", "private");
-	
-	// response 파일 스트림 작업
+	// 디렉터리 파일 삭제
 	String path = application.getRealPath("/uploads");
 	File target = new File(path + File.separator + file.getsName()); // 경로 + 구분자 + 파일명
-
-	try {
-		BufferedInputStream bis = new BufferedInputStream(new FileInputStream(target));
-		BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
-		
-		// 파일 전송
-		bis.transferTo(bos);
-		
-		bos.flush();
-		bos.close();
-		bis.close();		
-	}catch(Exception e){
-		e.printStackTrace();
-	}
+	
+	target.delete();
+	
+	// 파일 목록 이동
+	response.sendRedirect("../2.fileDownload.jsp");
 %>
 
 
