@@ -15,7 +15,7 @@
 	String content = request.getParameter("content");
 	
 	// Gmail 앱 비밀번호
-	String appPassword = "mgpq qvsv pjzs bcmj";
+	String appPassword = "구글 앱 비밀번호";
 	
 	// Gmail SMTP 서버 설정
 	Properties prop = new Properties();
