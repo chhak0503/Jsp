@@ -10,6 +10,11 @@
 		날짜 : 2025/02/11
 		이름 : 김철학
 		내용 : 8장 표현언어와 JSTL 
+
+		라이브러리 추가(메이븐 검색)
+		 - Maven > jakarta jstl 검색
+		 - Maven > Jakarta Standard Tag Library API > jakarta.servlet.jsp.jstl-api-3.0.0.jar
+		 - Maven > Jakarta Standard Tag Library Implementation > jakarta.servlet.jsp.jstl-3.0.1.jar
 	 -->
 </head>
 <body>
