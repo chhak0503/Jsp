@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,16 +18,18 @@
 			<th>나이</th>
 			<th>관리</th>
 		</tr>
-		<tr>
-			<td>a1101</td>
-			<td>홍길동</td>
-			<td>010-1234-1111</td>
-			<td>21</td>
-			<td>
-				<a href="/ch10/user1/modify.do">수정</a>
-				<a href="#">삭제</a>
-			</td>
-		</tr>
+		<c:forEach var="dto" items="${dtos}">
+			<tr>
+				<td>${dto.getUid()}</td>
+				<td>${dto.getName()}</td>
+				<td>${dto.hp}</td>
+				<td>${dto.age}</td>
+				<td>
+					<a href="/ch10/user1/modify.do">수정</a>
+					<a href="#">삭제</a>
+				</td>
+			</tr>
+		</c:forEach>
 	</table>	
 </body>
 </html>

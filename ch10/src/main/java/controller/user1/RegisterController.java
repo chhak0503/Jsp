@@ -21,7 +21,6 @@ public class RegisterController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		// View forward
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user1/register.jsp");
 		dispatcher.forward(req, resp);
@@ -29,7 +28,6 @@ public class RegisterController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
 		// 데이터 수신
 		String uid  = req.getParameter("uid");
 		String name = req.getParameter("name");
@@ -50,19 +48,3 @@ public class RegisterController extends HttpServlet {
 		resp.sendRedirect("/ch10/user1/list.do");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
