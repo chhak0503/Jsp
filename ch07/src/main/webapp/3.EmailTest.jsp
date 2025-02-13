@@ -8,6 +8,14 @@
 		날짜 : 2025/02/10
 		이름 : 김철학
 		내용 : JSP Email 전송 실습하기
+
+		1. 구글 앱 비밀번호 생성
+		 - 구글 계정 관리 > 보안 > 2단계 인증 > 2단계 인증 사용 설정
+		 - 구글 계정 관리 > 보안 > 앱 비밀번호(검색이용) > 앱 비밀번호 생성 후 생성 코드 잘 보관하기
+
+		2. 라이브러리 추가(Maven Repository)
+		 - activation 검색 > JavaBeans(TM) Activation Framework > activation-1.1.1.jar 다운로드
+		 - javax.mail 검색 > JavaMail API(javax.mail) > javax.mail-1.6.2.jar 다운로드
 	 -->
 </head>
 <body>
