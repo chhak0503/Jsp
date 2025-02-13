@@ -10,23 +10,23 @@
 	<a href="/ch10">처음으로</a>
 	<a href="/ch10/user1/list.do">목록이동</a>
 	
-	<form action="#" method="post">
+	<form action="/ch10/user1/modify.do" method="post">
 		<table border="1">
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" name="uid" placeholder="아이디 입력"></td>
+				<td><input type="text" name="uid" readonly value="${dto.uid}" placeholder="아이디 입력"></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="name" placeholder="이름 입력"></td>
+				<td><input type="text" name="name" value="${dto.name}" placeholder="이름 입력"></td>
 			</tr>
 			<tr>
 				<td>휴대폰</td>
-				<td><input type="text" name="hp" placeholder="휴대폰 입력"></td>
+				<td><input type="text" name="hp" value="${dto.hp}" placeholder="휴대폰 입력"></td>
 			</tr>
 			<tr>
 				<td>나이</td>
-				<td><input type="number" name="age" placeholder="나이 입력"></td>
+				<td><input type="number" name="age" value="${dto.age}" placeholder="나이 입력"></td>
 			</tr>
 			<tr>				
 				<td colspan="2" align="right">

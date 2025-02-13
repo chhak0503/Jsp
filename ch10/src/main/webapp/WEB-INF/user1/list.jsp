@@ -18,15 +18,15 @@
 			<th>나이</th>
 			<th>관리</th>
 		</tr>
-		<c:forEach var="dto" items="${dtos}">
+		<c:forEach var="dto" items="${dtos}"><!-- requestScope 생략 -->
 			<tr>
 				<td>${dto.getUid()}</td>
 				<td>${dto.getName()}</td>
 				<td>${dto.hp}</td>
 				<td>${dto.age}</td>
 				<td>
-					<a href="/ch10/user1/modify.do">수정</a>
-					<a href="#">삭제</a>
+					<a href="/ch10/user1/modify.do?uid=${dto.uid}">수정</a>
+					<a href="/ch10/user1/remove.do?uid=${dto.uid}">삭제</a>
 				</td>
 			</tr>
 		</c:forEach>
