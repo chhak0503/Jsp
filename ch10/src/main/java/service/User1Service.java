@@ -25,8 +25,8 @@ public class User1Service {
 		return dao.selectUser1(uid);
 	}
 	
-	public List<User1DTO> findAll() {
-		return dao.selectUser1All();
+	public List<User1DTO> findAllUser1() {
+		return dao.selectAllUser1();
 	}
 	
 	public void modifyUser1(User1DTO dto) {

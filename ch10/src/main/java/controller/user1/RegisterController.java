@@ -9,11 +9,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import service.User1Service;
 
 @WebServlet("/user1/register.do")
 public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = 3989756952756485921L;
+	
+	// 서비스 가져오기
+	private User1Service service = User1Service.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,8 +44,10 @@ public class RegisterController extends HttpServlet {
 		dto.setAge(age);
 		
 		// 서비스 호출
+		service.registerUser1(dto);
 		
-		
+		// 이동
+		resp.sendRedirect("/ch10/user1/list.do");
 	}
 }
 
