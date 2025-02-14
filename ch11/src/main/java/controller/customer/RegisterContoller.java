@@ -2,6 +2,9 @@ package controller.customer;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dto.CustomerDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -17,8 +20,20 @@ public class RegisterContoller extends HttpServlet {
 
 	private CustomerService service = CustomerService.INSTANCE;
 	
+	// 로거생성
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		// 로그 출력
+		logger.trace("RegisterContoller logger trace...");
+		logger.debug("RegisterContoller logger debug...");
+		logger.info("RegisterContoller logger info...");
+		logger.warn("RegisterContoller logger warn...");
+		logger.error("RegisterContoller logger error...");
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/shop/customer/register.jsp");
 		dispatcher.forward(req, resp);

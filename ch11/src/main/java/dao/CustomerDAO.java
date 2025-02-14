@@ -2,6 +2,9 @@ package dao;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dto.CustomerDTO;
 import util.DBHelper;
 import util.SQL;
@@ -13,6 +16,10 @@ public class CustomerDAO extends DBHelper {
 		return INSTANCE;
 	}
 	private CustomerDAO() {}
+	
+	
+	// 로거생성
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public void insertCustomer(CustomerDTO dto) {
 		try {
@@ -26,6 +33,9 @@ public class CustomerDAO extends DBHelper {
 			closeAll();
 		}catch (Exception e) {
 			e.printStackTrace();
+			
+			// 시스템 개선 및 업데이트 활용하기 위해 에러 내용을 로깅
+			logger.error(e.getMessage());
 		}
 	}
 	

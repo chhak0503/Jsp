@@ -13,6 +13,8 @@
 <body>
 	<h3>1.로그</h3>
 	
+	<h4>shop</h4>
+	<a href="/ch11/shop/customer/register.do">customer 등록</a>
 	
 </body>
 </html>
