@@ -2,17 +2,11 @@ package kr.co.jboard.util;
 
 public class SQL {
 
-	// customer
-	public static final String INSERT_CUSTOMER = "insert into `customer` values (?,?,?,?,NOW())";
+	// terms
+	public static final String SELECT_TERMS = "select * from `terms` where `no`=?";
 	
 	
-	
-	// order
-	
-	
-	
-	
-	// product
+
 	
 	
 }

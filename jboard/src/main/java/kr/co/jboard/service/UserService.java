@@ -6,7 +6,6 @@ import kr.co.jboard.dao.UserDAO;
 import kr.co.jboard.dto.UserDTO;
 
 public enum UserService {
-	
 	INSTANCE;	
 	private UserDAO dao = UserDAO.getInstance();
 	

@@ -7,7 +7,7 @@ import kr.co.jboard.dto.CommentDTO;
 
 public enum CommentService {
 	
-	INSTANCE;	
+	INSTANCE;
 	private CommentDAO dao = CommentDAO.getInstance();
 	
 	public void registeComment(CommentDTO dto) {
