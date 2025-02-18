@@ -8,7 +8,7 @@ public class SQL {
 	// user
 	public static final String INSERT_USER = "insert into `user` set "
 											+ "`uid`=?,"
-											+ "`pass`=?,"
+											+ "`pass`=SHA2(?, 256),"
 											+ "`name`=?,"
 											+ "`nick`=?,"
 											+ "`email`=?,"
