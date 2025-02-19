@@ -2,16 +2,47 @@
 <%@ include file="./_header.jsp" %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/jboard/js/daumPostcode.js"></script>
+<script>
+	
+	document.addEventListener('DOMContentLoaded', function(){
+		
+		
+		const btnCheckUid = document.getElementById('btnCheckUid');
+				
+		btnCheckUid.onclick = function(){
+			
+			
+			// 데이터 전송
+			const uid = formRegister.uid.value;
+			
+			fetch('/jboard/user/check.do?type=uid&value='+uid)
+			.then(response => response.json())
+			.then((data)=>{
+				console.log(data);
+			})
+			.catch((err)=>{
+				console.log(err);
+			});
+			
+			
+			
+			
+		}
+		
+		
+		
+	});
+</script>
 <main id="user">
     <section class="register">
-        <form action="/jboard/user/register.do" method="post">
+        <form action="/jboard/user/register.do" name="formRegister" method="post">
             <h2 class="tit">사이트 이용정보 입력</h2>
             <table border="1">                        
                 <tr>
                     <td>아이디</td>
                     <td>
                         <input type="text" name="uid" placeholder="아이디 입력"/>
-                        <button type="button"><img src="../images/chk_id.gif" alt="중복확인"/></button>
+                        <button type="button" id="btnCheckUid"><img src="../images/chk_id.gif" alt="중복확인"/></button>
                         <span class="uidResult"></span>
                     </td>
                 </tr>

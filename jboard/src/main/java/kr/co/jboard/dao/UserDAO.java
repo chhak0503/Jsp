@@ -2,6 +2,9 @@ package kr.co.jboard.dao;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.jboard.dto.UserDTO;
 import kr.co.jboard.util.DBHelper;
 import kr.co.jboard.util.SQL;
@@ -12,6 +15,8 @@ public class UserDAO extends DBHelper {
 		return INSTANCE;
 	}
 	private UserDAO() {}
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public void insertUser(UserDTO dto) {
 		try {
@@ -32,6 +37,25 @@ public class UserDAO extends DBHelper {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int selectCountUser(String type, String value) {
+		
+		int count = 0;
+		
+		String sql = "";
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(sql);
+			
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		
+		return count;
 	}
 	
 	public UserDTO selectUser(String uid) {
