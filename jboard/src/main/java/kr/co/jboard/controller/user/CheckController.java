@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import kr.co.jboard.service.UserService;
 
 
@@ -40,7 +41,11 @@ public class CheckController extends HttpServlet {
 		
 		// 이메일 인증번호 발송
 		if(type.equals("email") && count == 0) {
-			service.sendEmailCode(value);
+			int code = service.sendEmailCode(value);
+			
+			// 세션 저장
+			HttpSession session = req.getSession();
+			session.setAttribute("authCode", code);
 		}
 		
 		// JSON 생성
