@@ -56,10 +56,32 @@
 					nickResult.innerText = '사용 가능한 별명 입니다.';
 					nickResult.style.color = 'green';
 				}
-				
 			}catch(err){
 				console.log(err);
 			}
+		}
+		
+		// 이메일 인증처리
+		const btnSendEmail = document.getElementById('btnSendEmail');
+		const emailResult = document.querySelector('.emailResult');
+		const auth = document.querySelector('.auth');
+		
+		btnSendEmail.onclick = async function(){
+			
+			const value = formRegister.email.value;
+			
+			const response = await fetch('/jboard/user/check.do?type=email&value='+value);
+			const data = await response.json();
+			
+			if(data.count > 0){
+				emailResult.innerText = '이미 사용중인 이메일 입니다.';
+				emailResult.style.color = 'red';
+			}else {
+				// 인증번호 입력 필드 출력 
+				auth.style.display = 'block';
+				
+			}
+			
 		}
 		
 		
@@ -110,7 +132,8 @@
                     <td>이메일</td>
                     <td>
                         <input type="email" name="email" placeholder="이메일 입력"/>
-                        <button type="button"><img src="../images/chk_auth.gif" alt="인증번호 받기"/></button>
+                        <button type="button" id="btnSendEmail"><img src="../images/chk_auth.gif" alt="인증번호 받기"/></button>
+                        <span class="emailResult"></span>
                         <div class="auth">
                             <input type="text" name="auth" placeholder="인증번호 입력"/>
                             <button type="button"><img src="../images/chk_confirm.gif" alt="확인"/></button>

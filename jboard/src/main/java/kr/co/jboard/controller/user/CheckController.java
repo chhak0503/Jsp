@@ -38,6 +38,11 @@ public class CheckController extends HttpServlet {
 		int count = service.countUser(type, value);
 		logger.debug("count : " + count);
 		
+		// 이메일 인증번호 발송
+		if(type.equals("email") && count == 0) {
+			service.sendEmailCode(value);
+		}
+		
 		// JSON 생성
 		JsonObject json = new JsonObject();
 		json.addProperty("count", count);
