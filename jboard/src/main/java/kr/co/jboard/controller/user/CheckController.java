@@ -41,11 +41,11 @@ public class CheckController extends HttpServlet {
 		
 		// 이메일 인증번호 발송
 		if(type.equals("email") && count == 0) {
-			int code = service.sendEmailCode(value);
+			String code = service.sendEmailCode(value);
 			
 			// 세션 저장
 			HttpSession session = req.getSession();
-			session.setAttribute("authCode", code);
+			session.setAttribute("sessAuthCode", code);
 		}
 		
 		// JSON 생성
@@ -60,6 +60,29 @@ public class CheckController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+		// 전송 데이터 수신처리
+		String authCode = req.getParameter("authCode");
+		logger.debug("authCode : " + authCode);
+		
+		// 세션에 저장된 코드와 비교 후 JSON 출력
+		HttpSession session = req.getSession();
+		String sessAuthCode = (String) session.getAttribute("sessAuthCode");
+		logger.debug("sessAuthCode : " + sessAuthCode);
+		
+		if(authCode.equals(sessAuthCode)){
+			// 인증 성공
+			JsonObject json = new JsonObject();
+			json.addProperty("result", 1);
+			resp.getWriter().println(json);			
+			
+		}else {
+			// 인증 실패
+			JsonObject json = new JsonObject();
+			json.addProperty("result", 0);
+			resp.getWriter().println(json);
+		}
+	
 	}
 }
 

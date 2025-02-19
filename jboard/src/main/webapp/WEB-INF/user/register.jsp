@@ -79,11 +79,38 @@
 			}else {
 				// 인증번호 입력 필드 출력 
 				auth.style.display = 'block';
-				
+			}
+		}
+		
+		const btnAuthEmail = document.getElementById('btnAuthEmail');
+		
+		btnAuthEmail.onclick = async function(){
+			
+			const value = formRegister.auth.value;
+			
+			// 폼 데이터 생성
+			const formData = new URLSearchParams();
+			formData.append("authCode", value);
+			
+			// 서버 전송
+			const response = await fetch('/jboard/user/check.do', {
+											method: 'POST',
+											headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+											body: formData
+										});
+			
+			const data = await response.json();
+			console.log(data);
+			
+			if(data.result > 0){
+				emailResult.innerText = '이메일이 인증 되었습니다.';
+				emailResult.style.color = 'green';
+			}else{
+				emailResult.innerText = '유효한 인증코드가 아닙니다.';
+				emailResult.style.color = 'red';
 			}
 			
 		}
-		
 		
 		
 	});
@@ -136,7 +163,7 @@
                         <span class="emailResult"></span>
                         <div class="auth">
                             <input type="text" name="auth" placeholder="인증번호 입력"/>
-                            <button type="button"><img src="../images/chk_confirm.gif" alt="확인"/></button>
+                            <button type="button" id="btnAuthEmail"><img src="../images/chk_confirm.gif" alt="확인"/></button>
                         </div>
                     </td>
                 </tr>

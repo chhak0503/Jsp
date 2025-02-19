@@ -48,7 +48,7 @@ public enum UserService {
 	}
 	
 	// 이메일 발송
-	public int sendEmailCode(String receiver) {
+	public String sendEmailCode(String receiver) {
 		
 		// 인증번호 생성
 		int code = ThreadLocalRandom.current().nextInt(100000, 1000000);
@@ -90,7 +90,7 @@ public enum UserService {
 			e.printStackTrace();
 		}
 		
-		return code;
+		return ""+code;
 	}
 	
 	
