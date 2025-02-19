@@ -16,14 +16,14 @@
 			const uid = formRegister.uid.value;
 			
 			fetch('/jboard/user/check.do?type=uid&value='+uid)
-			.then(response => response.json())
-			.then((data)=>{
-				console.log(data);
-			})
-			.catch((err)=>{
-				console.log(err);
-			});
-			
+				.then(response => response.json())
+				.then((data)=>{
+					console.log(data);
+				})
+				.catch((err)=>{
+					console.log(err);
+				});
+				
 			
 			
 			

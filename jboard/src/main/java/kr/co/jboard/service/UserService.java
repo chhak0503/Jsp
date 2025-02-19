@@ -13,6 +13,10 @@ public enum UserService {
 		dao.insertUser(dto);
 	}
 	
+	public int countUser(String type, String value) {
+		return dao.selectCountUser(type, value);
+	}
+	
 	public UserDTO findUser(String uid) {
 		return dao.selectUser(uid);
 	}

@@ -1,15 +1,19 @@
 package kr.co.jboard.controller.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.JsonObject;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.co.jboard.service.UserService;
 
 
 @WebServlet("/user/check.do")
@@ -18,6 +22,7 @@ public class CheckController extends HttpServlet {
 	private static final long serialVersionUID = -8567214395021632366L;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private UserService service = UserService.INSTANCE;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,8 +34,17 @@ public class CheckController extends HttpServlet {
 		System.out.println("type : " + type + ", value : " + value); // 시스템 콘솔 이용
 		logger.debug("type : " + type + ", value : " + value); // 로거 이용
 		
+		// 카운트 조회하기
+		int count = service.countUser(type, value);
+		logger.debug("count : " + count);
 		
+		// JSON 생성
+		JsonObject json = new JsonObject();
+		json.addProperty("count", count);
 		
+		// JSON 출력
+		PrintWriter writer = resp.getWriter();
+		writer.println(json);
 	}
 	
 	@Override

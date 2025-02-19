@@ -43,18 +43,33 @@ public class UserDAO extends DBHelper {
 		
 		int count = 0;
 		
-		String sql = "";
+		// String 불변성을 고려해 StringBuilder로 동적 SQL 생성 
+		StringBuilder sql = new StringBuilder(SQL.SELECT_COUNT_USER);
+		
+		if(type.equals("uid")) {
+			sql.append(SQL.WHERE_UID);
+		}else if(type.equals("nick")) {
+			sql.append(SQL.WHERE_NICK);
+		}else if(type.equals("email")) {
+			sql.append(SQL.WHERE_EMAIL);
+		}else if(type.equals("hp")) {
+			sql.append(SQL.WHERE_HP);
+		}
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(sql);
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setString(1, value);
 			
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			closeAll();
 			
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
 		return count;
 	}
 	
