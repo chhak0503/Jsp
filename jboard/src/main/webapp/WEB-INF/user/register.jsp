@@ -7,10 +7,11 @@
 	document.addEventListener('DOMContentLoaded', function(){
 		
 		
+		// 아이디 중복체크
 		const btnCheckUid = document.getElementById('btnCheckUid');
-				
+		const uidResult = document.getElementsByClassName('uidResult')[0];
+		
 		btnCheckUid.onclick = function(){
-			
 			
 			// 데이터 전송
 			const uid = formRegister.uid.value;
@@ -19,14 +20,46 @@
 				.then(response => response.json())
 				.then((data)=>{
 					console.log(data);
+					
+					if(data.count > 0){
+						// 이미 사용중인 아이디
+						uidResult.innerText = '이미 사용중인 아이디 입니다.';
+						uidResult.style.color = 'red';
+					}else{
+						// 사용 가능한 아이디
+						uidResult.innerText = '사용 가능한 아이디 입니다.';
+						uidResult.style.color = 'green';
+					}
 				})
 				.catch((err)=>{
 					console.log(err);
 				});
+		}
+		
+		// 별명 중복체크
+		const btnCheckNick = document.getElementById('btnCheckNick');
+		const nickResult = document.getElementsByClassName('nickResult')[0];
+		
+		btnCheckNick.onclick = async function(){
+			
+			const value = formRegister.nick.value;
+			
+			try {
+				const response = await fetch('/jboard/user/check.do?type=nick&value='+value);
+				const data = await response.json();
+				console.log(data);
 				
-			
-			
-			
+				if(data.count > 0){
+					nickResult.innerText = '이미 사용중인 별명 입니다.';
+					nickResult.style.color = 'red';
+				}else{
+					nickResult.innerText = '사용 가능한 별명 입니다.';
+					nickResult.style.color = 'green';
+				}
+				
+			}catch(err){
+				console.log(err);
+			}
 		}
 		
 		
@@ -69,7 +102,7 @@
                     <td>
                         <p class="nickInfo">공백없는 한글, 영문, 숫자 입력</p>
                         <input type="text" name="nick" placeholder="별명 입력"/>
-                        <button type="button"><img src="../images/chk_id.gif" alt="중복확인"/></button>
+                        <button type="button" id="btnCheckNick"><img src="../images/chk_id.gif" alt="중복확인"/></button>
                         <span class="nickResult"></span>
                     </td>
                 </tr>

@@ -41,6 +41,7 @@ public class CheckController extends HttpServlet {
 		// JSON 생성
 		JsonObject json = new JsonObject();
 		json.addProperty("count", count);
+		logger.debug("json : " + json);
 		
 		// JSON 출력
 		PrintWriter writer = resp.getWriter();
