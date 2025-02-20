@@ -3,20 +3,42 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/jboard/js/daumPostcode.js"></script>
 <script>
+
+	//유효성 검사에 사용할 정규표현식
+	const reUid   = /^[a-z]+[a-z0-9]{4,19}$/g;
+	const rePass  = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{5,16}$/;
+	const reName  = /^[가-힣]{2,10}$/ 
+	const reNick  = /^[a-zA-Zㄱ-힣0-9][a-zA-Zㄱ-힣0-9]*$/;
+	const reEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	const reHp    = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;
 	
 	document.addEventListener('DOMContentLoaded', function(){
 		
+		// 유효성 검사에 사용할 상태 변수
+		let isUidOk = false;
+		let isPassOk = false;
+		let isNameOk = false;
+		let isNickOk = false;
+		let isEmailOk = false;
+		let isHpOk = false;
 		
-		// 아이디 중복체크
+		// 1.아이디 유효성 검사(중복체크 포함)
 		const btnCheckUid = document.getElementById('btnCheckUid');
 		const uidResult = document.getElementsByClassName('uidResult')[0];
 		
-		btnCheckUid.onclick = function(){
+		btnCheckUid.onclick = function(){						
+			const value = formRegister.uid.value;
 			
-			// 데이터 전송
-			const uid = formRegister.uid.value;
+			// 아이디 유효성 검사
+			if(!value.match(reUid)){
+				uidResult.innerText = '아이디 형식에 맞지 않습니다.';
+				uidResult.style.color = 'red';
+				isUidOk = false;
+				return; // 처리 종료
+			}
 			
-			fetch('/jboard/user/check.do?type=uid&value='+uid)
+			// 아이디 중복 체크
+			fetch('/jboard/user/check.do?type=uid&value='+value)
 				.then(response => response.json())
 				.then((data)=>{
 					console.log(data);
@@ -25,16 +47,44 @@
 						// 이미 사용중인 아이디
 						uidResult.innerText = '이미 사용중인 아이디 입니다.';
 						uidResult.style.color = 'red';
+						isUidOk = false;
 					}else{
 						// 사용 가능한 아이디
 						uidResult.innerText = '사용 가능한 아이디 입니다.';
 						uidResult.style.color = 'green';
+						isUidOk = true;
 					}
 				})
 				.catch((err)=>{
 					console.log(err);
 				});
 		}
+		
+		// 2.비밀번호 유효성 검사
+		const passResult = document.getElementsByClassName('passResult')[0];
+		
+		formRegister.pass2.addEventListener('focusout', function(){
+			
+			const value1 = formRegister.pass1.value;
+			const value2 = formRegister.pass2.value;
+			
+			if(!value1.match(rePass)){
+				passResult.innerText = '비밀번호는 숫자, 소문자, 대문자, 특수문자 조합 8자리';
+				passResult.style.color = 'red';
+				isPassOk = false;
+				return;
+			}
+			
+			if(value1 === value2){
+				passResult.innerText = '사용 가능한 비밀번호 입니다.';
+				passResult.style.color = 'green';
+				isPassOk = true;
+			}else{
+				passResult.innerText = '비밀번호가 일치하지 않습니다.';
+				passResult.style.color = 'red';
+				isPassOk = false;
+			}
+		});
 		
 		// 별명 중복체크
 		const btnCheckNick = document.getElementById('btnCheckNick');
@@ -110,7 +160,43 @@
 				emailResult.style.color = 'red';
 			}
 			
-		}
+		} // btnAuthEmail.onclick end
+		
+		// 최종 폼 전송 이벤트
+		formRegister.onsubmit = function(e){
+			
+			// 1) 아이디 유효성 검사 결과
+			if(!isUidOk){
+				return false; // 폼 전송 취소
+			}
+			
+			// 2) 비밀번호 유효성 검사 결과
+			if(!isPassOk){
+				return false;
+			}
+			
+			// 3) 이름 유효성 검사 결과
+			if(!isNameOk){
+				return false;
+			}
+			
+			// 4) 별명 유효성 검사 결과
+			if(!isNickOk){
+				return false;
+			}
+			
+			// 5) 이메일 유효성 검사 결과
+			if(!isEmailOk){
+				return false;
+			}
+			
+			// 6) 휴대폰 유효성 검사 결과
+			if(!isHpOk){
+				return false;
+			}
+			
+			return true; // 폼 전송 시작
+		} // 최종 폼 전송 이벤트 끝
 		
 		
 	});
@@ -130,7 +216,10 @@
                 </tr>
                 <tr>
                     <td>비밀번호</td>
-                    <td><input type="password" name="pass1" placeholder="비밀번호 입력"/></td>
+                    <td>
+                    	<input type="password" name="pass1" placeholder="비밀번호 입력"/>
+                    	<span class="passResult"></span>
+                    </td>
                 </tr>
                 <tr>
                     <td>비밀번호 확인</td>
