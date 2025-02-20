@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}catch(err){
 			console.log(err);
 		}
-	}
+	};
 	
 	// 5. 이메일 유효성 검사(중복/인증처리 포함)
 	const btnSendEmail = document.getElementById('btnSendEmail');
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			// 인증번호 입력 필드 출력 
 			auth.style.display = 'block';
 		}
-	}
+	};
 	
 	const btnAuthEmail = document.getElementById('btnAuthEmail');
 	
@@ -262,7 +262,5 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 		
 		return true; // 폼 전송 시작
-	} // 최종 폼 전송 이벤트 끝
-	
-	
+	}; // 최종 폼 전송 이벤트 끝
 });

@@ -26,4 +26,20 @@ public class SQL {
 											+ "`regip`=?,"
 											+ "`regDate`=NOW()";
 
+	// article
+	public static final String INSERT_ARTICLE = "insert into `article` set "
+													+ "`title`=?,"
+													+ "`content`=?,"
+													+ "`writer`=?,"
+													+ "`regip`=?,"
+													+ "`wdate`=NOW()";
+	
+	
 }
+
+
+
+
+
+
+
