@@ -13,12 +13,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.jboard.dto.ArticleDTO;
 import kr.co.jboard.service.ArticleService;
+import kr.co.jboard.service.FileService;
 
 @WebServlet("/article/write.do")
 public class WriteController extends HttpServlet {
 	private static final long serialVersionUID = 1222232765653325736L;
 	
 	private ArticleService service = ArticleService.INSTANCE;
+	private FileService fileService = FileService.INSTANCE;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
@@ -37,6 +39,9 @@ public class WriteController extends HttpServlet {
 		String content = req.getParameter("content");
 		String writer = req.getParameter("writer");
 		String regip = req.getRemoteAddr();
+		
+		// 파일 업로드 서비스 호출
+		fileService.uploadFile(req);
 		
 		// DTO 생성
 		ArticleDTO dto = new ArticleDTO();

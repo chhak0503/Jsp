@@ -14,7 +14,7 @@
                 <nav>
                     <h1>글쓰기</h1>
                 </nav>
-                <form action="/jboard/article/write.do" method="post">
+                <form action="/jboard/article/write.do" method="post" enctype="multipart/form-data">
                 	<input type="hidden" name="writer" value="${sessUser.uid}" readonly>
                     <table border="0">                        
                         <tr>
@@ -30,7 +30,11 @@
                         <tr>
                             <th>파일</th>
                             <td>
-                                <input type="file" name="file" />
+                            	<p style="margin-bottom: 6px;">
+                            		최대 2개 파일 첨부 가능, 각 파일당 최대 10MB까지 가능
+                            	</p>
+                                <input type="file" name="file1" />
+                                <input type="file" name="file2" />
                             </td>
                         </tr>
                     </table>
