@@ -25,7 +25,7 @@ public class SQL {
 											+ "`addr2`=?,"
 											+ "`regip`=?,"
 											+ "`regDate`=NOW()";
-
+	
 	// article
 	public static final String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `article`";
 	public static final String INSERT_ARTICLE = "insert into `article` set "
@@ -35,7 +35,6 @@ public class SQL {
 													+ "`writer`=?,"
 													+ "`regip`=?,"
 													+ "`wdate`=NOW()";
-	
 	
 	// file
 	public static final String INSERT_FILE = "insert into `file` set "
