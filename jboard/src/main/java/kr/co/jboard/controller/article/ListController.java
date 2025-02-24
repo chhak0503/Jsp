@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.jboard.dto.ArticleDTO;
+import kr.co.jboard.dto.PageGroupDTO;
 import kr.co.jboard.service.ArticleService;
 
 @WebServlet("/article/list.do")
@@ -36,12 +37,21 @@ public class ListController extends HttpServlet {
 		// LIMIT용 start
 		int start = service.getStartNum(currentPage);
 		
+		// 페이지 그룹 구하기
+		PageGroupDTO pageGroupDTO = service.getCurrentPageGroup(currentPage, lastPageNum);
+		
+		// 페이지 시작번호 구하기
+		int pageStartNum = service.getPageStartNum(total, currentPage);
+		
 		// 글목록 데이터 조회
 		List<ArticleDTO> articles = service.findAllArticle(start);
 		
 		// 데이터 참조 공유
 		req.setAttribute("articles", articles);
+		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("pageStartNum", pageStartNum);
+		req.setAttribute("pageGroupDTO", pageGroupDTO);
 		
 		// View forward
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/article/list.jsp");

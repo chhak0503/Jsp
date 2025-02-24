@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.jboard.dao.ArticleDAO;
 import kr.co.jboard.dto.ArticleDTO;
+import kr.co.jboard.dto.PageGroupDTO;
 
 public enum ArticleService {
 	
@@ -63,6 +64,25 @@ public enum ArticleService {
 		return (currentPage - 1) * 10;
 	}
 	
+	// 페이지 그룹 계산하기
+	public PageGroupDTO getCurrentPageGroup(int currentPage, int lastPageNum) {
+		
+		int currentPageGroup = (int) Math.ceil(currentPage / 10.0);
+		int pageGroupStart = (currentPageGroup - 1) * 10 + 1; 
+		int pageGroupEnd = currentPageGroup * 10;
+		
+		if(pageGroupEnd > lastPageNum) {			
+			pageGroupEnd = lastPageNum;
+		}
+		
+		return new PageGroupDTO(pageGroupStart, pageGroupEnd);
+	}
+	
+	// 페이지 시작번호 구하기
+	public int getPageStartNum(int total, int currentPage) {
+		int start = (currentPage - 1) * 10;
+		return total - start;		
+	}
 	
 }
 
