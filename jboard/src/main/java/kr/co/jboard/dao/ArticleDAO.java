@@ -50,13 +50,32 @@ public class ArticleDAO extends DBHelper {
 		return null;
 	}
 	
-	public List<ArticleDTO> selectAllArticle() {
+	public int selectCountArticle() {
+		
+		int total = 0;
+		
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_COUNT_ARTICLE);
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			closeAll();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	
+	public List<ArticleDTO> selectAllArticle(int start) {
 		
 		List<ArticleDTO> articles = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_ALL_ARTICLE);
+			psmt.setInt(1, start);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {

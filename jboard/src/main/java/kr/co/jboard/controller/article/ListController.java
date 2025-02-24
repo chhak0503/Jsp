@@ -21,11 +21,27 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		
+		// 전체 게시물 갯수 구하기
+		int total = service.getCountArticle();
+		
+		// 마지막 페이지 번호 구하기
+		int lastPageNum = service.getLastPageNum(total);
+		
+		
+		
+		
+		// LIMIT용 start
+		int start = 0;
+		
+		
+		
 		// 글목록 데이터 조회
-		List<ArticleDTO> articles = service.findAllArticle();
+		List<ArticleDTO> articles = service.findAllArticle(start);
 		
 		// 데이터 참조 공유
 		req.setAttribute("articles", articles);
+		req.setAttribute("lastPageNum", lastPageNum);
 		
 		// View forward
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/article/list.jsp");
