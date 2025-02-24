@@ -71,6 +71,7 @@ public class ArticleDAO extends DBHelper {
 				dto.setWriter(rs.getString(8));
 				dto.setRegip(rs.getString(9));
 				dto.setWdate(rs.getString(10));
+				dto.setNick(rs.getString(11));
 				articles.add(dto);
 			}
 			closeAll();		

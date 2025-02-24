@@ -32,7 +32,7 @@
 	                    <tr>
 	                        <td>${article.no}</td>
 	                        <td><a href="/jboard/article/view.do">${article.title}[${article.comment}]</a></td>
-	                        <td>${article.writer}</td>
+	                        <td>${article.nick}</td>
 	                        <td>${article.wdate}</td>
 	                        <td>${article.hit}</td>
 	                    </tr>
