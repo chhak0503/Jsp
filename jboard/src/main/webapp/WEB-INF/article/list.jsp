@@ -42,7 +42,7 @@
                 <div class="page">
                     <a href="#" class="prev">이전</a>
                     <c:forEach var="num" begin="1" end="${lastPageNum}">
-                    	<a href="#" class="num">${num}</a>
+                    	<a href="/jboard/article/list.do?pg=${num}" class="num">${num}</a>
                     </c:forEach>
                     <a href="#" class="next">다음</a>
                 </div>

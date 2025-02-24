@@ -21,6 +21,8 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		// pg 데이터 수신
+		String pg = req.getParameter("pg");
 		
 		// 전체 게시물 갯수 구하기
 		int total = service.getCountArticle();
@@ -28,13 +30,11 @@ public class ListController extends HttpServlet {
 		// 마지막 페이지 번호 구하기
 		int lastPageNum = service.getLastPageNum(total);
 		
-		
-		
+		// 현재 페이지 번호 구하기
+		int currentPage = service.getCurrentPage(pg);
 		
 		// LIMIT용 start
-		int start = 0;
-		
-		
+		int start = service.getStartNum(currentPage);
 		
 		// 글목록 데이터 조회
 		List<ArticleDTO> articles = service.findAllArticle(start);

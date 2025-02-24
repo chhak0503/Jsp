@@ -44,16 +44,37 @@ public enum ArticleService {
 		}else {
 			lastPageNum = total / 10 + 1;	
 		}
-		
 		return lastPageNum;
 	}
 	
+	// 현재 페이지 번호 구하기 
+	public int getCurrentPage(String pg) {
+		
+		int currentPage = 1; 
+		
+		if(pg != null) {
+			currentPage = Integer.parseInt(pg);
+		}
+		return currentPage;
+	}
 	
-	
-	
-	
-	
-	
+	// 페이지 시작번호 구하기(LIMIT 용)
+	public int getStartNum(int currentPage) {
+		return (currentPage - 1) * 10;
+	}
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
