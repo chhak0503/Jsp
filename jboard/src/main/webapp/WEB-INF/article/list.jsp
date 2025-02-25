@@ -5,7 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <title>글목록</title>
-    <link rel="stylesheet" href="/jboard/css/style.css"/>   
+    <link rel="stylesheet" href="/jboard/css/style.css"/>
+    <!-- 
+    	샘플 데이터 채우기
+    	INSERT INTO `article` (`title`, `content`, `writer`, `regip`, `wdate`) 
+		SELECT `title`, `content`, `writer`, `regip`, `wdate` FROM `article`;
+    -->
 </head>
 <body>
     <div id="wrapper">

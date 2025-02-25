@@ -18,6 +18,11 @@ public class ListController extends HttpServlet {
 	private static final long serialVersionUID = 1271262765653325736L;
 	
 	private ArticleService service = ArticleService.INSTANCE;
+	/* 
+		샘플 데이터 채우기
+		INSERT INTO `article` (`title`, `content`, `writer`, `regip`, `wdate`) 
+		SELECT `title`, `content`, `writer`, `regip`, `wdate` FROM `article`;
+	*/
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

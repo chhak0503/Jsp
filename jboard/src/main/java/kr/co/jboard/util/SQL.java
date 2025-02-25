@@ -68,19 +68,6 @@ public class SQL {
 												+ "`sName`=?,"
 												+ "`rdate`=NOW()";
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 
