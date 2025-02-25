@@ -98,7 +98,43 @@ public class ArticleDAO extends DBHelper {
 			logger.error(e.getMessage());
 		}
 		return articles;
+	}// selectAllArticle end
+	
+	
+	public void selectAllArticleBySearch(ArticleDTO dto) {
+		
+		StringBuilder sql = new StringBuilder(SQL.SELECT_ALL_ARTICLE_BY_SEARCH);
+		
+		if(dto.getSearchType().equals("title")) {
+			sql.append(SQL.WHERE_FOR_SEARCH_TITLE);
+		}else if(dto.getSearchType().equals("content")) {
+			sql.append(SQL.WHERE_FOR_SEARCH_CONTENT);
+		}else if(dto.getSearchType().equals("writer")) {
+			sql.append(SQL.WHERE_FOR_SEARCH_WRITER);
+		}
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setString(1, dto.getKeyword());
+			
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				
+				
+				
+			}
+			
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+			
+		
+		
 	}
+	
+	
 	
 	public void updateArticle(ArticleDTO dto) {
 		
