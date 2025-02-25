@@ -101,37 +101,48 @@ public class ArticleDAO extends DBHelper {
 	}// selectAllArticle end
 	
 	
-	public void selectAllArticleBySearch(ArticleDTO dto) {
+	public List<ArticleDTO> selectAllArticleBySearch(ArticleDTO articleDTO) {
+		
+		List<ArticleDTO> articles = new ArrayList<ArticleDTO>();
 		
 		StringBuilder sql = new StringBuilder(SQL.SELECT_ALL_ARTICLE_BY_SEARCH);
 		
-		if(dto.getSearchType().equals("title")) {
+		if(articleDTO.getSearchType().equals("title")) {
 			sql.append(SQL.WHERE_FOR_SEARCH_TITLE);
-		}else if(dto.getSearchType().equals("content")) {
+		}else if(articleDTO.getSearchType().equals("content")) {
 			sql.append(SQL.WHERE_FOR_SEARCH_CONTENT);
-		}else if(dto.getSearchType().equals("writer")) {
+		}else if(articleDTO.getSearchType().equals("writer")) {
 			sql.append(SQL.WHERE_FOR_SEARCH_WRITER);
 		}
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(sql.toString());
-			psmt.setString(1, dto.getKeyword());
+			psmt.setString(1, "%"+articleDTO.getKeyword()+"%");
+			logger.debug(psmt.toString());
 			
 			rs = psmt.executeQuery();
+			
 			while(rs.next()) {
-				
-				
-				
+				ArticleDTO dto = new ArticleDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setCate(rs.getString(2));
+				dto.setTitle(rs.getString(3));
+				dto.setContent(rs.getString(4));
+				dto.setComment(rs.getInt(5));
+				dto.setFile(rs.getInt(6));
+				dto.setHit(rs.getInt(7));
+				dto.setWriter(rs.getString(8));
+				dto.setRegip(rs.getString(9));
+				dto.setWdate(rs.getString(10));
+				dto.setNick(rs.getString(11));
+				articles.add(dto);
 			}
-			
-			
+			closeAll();
 		}catch (Exception e) {
 			logger.error(e.getMessage());
-		}
-			
-		
-		
+		}			
+		return articles;		
 	}
 	
 	
