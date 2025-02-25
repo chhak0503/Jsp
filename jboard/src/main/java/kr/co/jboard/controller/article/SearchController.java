@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.jboard.dto.ArticleDTO;
+import kr.co.jboard.dto.PageGroupDTO;
 import kr.co.jboard.service.ArticleService;
 
 @WebServlet("/article/search.do")
@@ -33,17 +34,26 @@ public class SearchController extends HttpServlet {
 		// 페이징 처리 관련 서비스 호출
 		int total = service.getCountArticleBySearch(dto);
 		int lastPageNum = service.getLastPageNum(total);
-		int currentPage = service.getCurrentPage(pg);
+		int currentPage = service.getCurrentPage(pg);		
 		int start = service.getStartNum(currentPage);
+		
+		PageGroupDTO pageGroupDTO = service.getCurrentPageGroup(currentPage, lastPageNum);
+		int pageStartNum = service.getPageStartNum(total, currentPage);
 		
 		// 서비스 호출
 		List<ArticleDTO> articles = service.searchAllArticle(dto, start);
 						
 		// 데이터 참조 공유
 		req.setAttribute("articles", articles);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("pageStartNum", pageStartNum);
+		req.setAttribute("pageGroupDTO", pageGroupDTO);
+		req.setAttribute("searchType", searchType);
+		req.setAttribute("keyword", keyword);
 		
 		// View 포워드
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/article/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/article/searchList.jsp");
 		dispatcher.forward(req, resp);	
 	}
 	
