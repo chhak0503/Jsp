@@ -21,6 +21,7 @@ public class SearchController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 데이터 수신
+		String pg = req.getParameter("pg");
 		String searchType = req.getParameter("searchType");
 		String keyword = req.getParameter("keyword");
 		
@@ -29,8 +30,14 @@ public class SearchController extends HttpServlet {
 		dto.setSearchType(searchType);
 		dto.setKeyword(keyword);
 		
+		// 페이징 처리 관련 서비스 호출
+		int total = service.getCountArticleBySearch(dto);
+		int lastPageNum = service.getLastPageNum(total);
+		int currentPage = service.getCurrentPage(pg);
+		int start = service.getStartNum(currentPage);
+		
 		// 서비스 호출
-		List<ArticleDTO> articles = service.searchAllArticle(dto);
+		List<ArticleDTO> articles = service.searchAllArticle(dto, start);
 						
 		// 데이터 참조 공유
 		req.setAttribute("articles", articles);
