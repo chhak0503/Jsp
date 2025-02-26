@@ -48,7 +48,6 @@ public class ArticleDAO extends DBHelper {
 	}
 	
 	public ArticleDTO selectArticle(String no) {
-		
 		ArticleDTO dto = null;
 		List<FileDTO> files = new ArrayList<>();
 		

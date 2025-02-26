@@ -29,7 +29,9 @@
 	                        <th>파일</th>
 	                        <td>
 	                        	<c:forEach var="file" items="${articleDTO.files}">
-	                        		<p style="margin-top:6px;"><a href="#">${file.oName}</a>&nbsp;<span>${file.download}</span>회 다운로드</p>
+	                        		<p style="margin-top:6px;">
+	                        			<a href="/jboard/file/download.do?fno=${file.fno}">${file.oName}</a>&nbsp;<span>${file.download}</span>회 다운로드
+	                        		</p>
 	                        	</c:forEach>
 	                        </td>
 	                    </tr>

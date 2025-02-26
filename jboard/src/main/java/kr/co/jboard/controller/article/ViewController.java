@@ -29,7 +29,6 @@ public class ViewController extends HttpServlet {
 		// 데이터 공유 참조
 		req.setAttribute("articleDTO", articleDTO);
 		
-		
 		// View forward
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/article/view.jsp");
 		dispatcher.forward(req, resp);

@@ -77,6 +77,7 @@ public class SQL {
 												+ "`sName`=?,"
 												+ "`rdate`=NOW()";
 	
+	public final static String SELECT_FILE_BY_FNO = "select * from `file` where `fno`=?";
 }
 
 
