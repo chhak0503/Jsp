@@ -78,6 +78,8 @@ public class SQL {
 												+ "`rdate`=NOW()";
 	
 	public final static String SELECT_FILE_BY_FNO = "select * from `file` where `fno`=?";
+	public final static String UPDATE_FILE_DOWNLOAD_COUNT = "UPDATE `file` SET `download` = `download` + 1 WHERE `fno`=?";
+	
 }
 
 

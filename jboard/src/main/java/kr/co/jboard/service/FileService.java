@@ -41,11 +41,14 @@ public enum FileService {
 	public void modifyFile(FileDTO dto) {
 		dao.updateFile(dto);
 	}
-	
+		
 	public void deleteFile(int fno) {
 		dao.deleteFile(fno);
 	}
 	
+	public void downloadCountUp(String fno) {
+		dao.updateFileDownloadCount(fno);
+	}
 	
 	// 파일 업로드
 	public List<FileDTO> uploadFile(HttpServletRequest req) {
@@ -102,18 +105,21 @@ public enum FileService {
 	// 파일 다운로드
 	public void downloadFile(HttpServletRequest req, HttpServletResponse resp) {
 		
+		// 공유 참조된 파일 정보객체 가져오기
+		FileDTO fileDTO = (FileDTO) req.getAttribute("fileDTO");
+		
 		ServletContext ctx = req.getServletContext();
 		String path = ctx.getRealPath("/uploads");
-		File target = new File(path + File.separator + file.getsName()); // 경로 + 구분자 + 파일명
-		
-		// response 파일 다운로드 헤더 정보
-		resp.setContentType("application/octet-stream");
-		resp.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(fileDTO.getoName(), "utf-8"));
-		resp.setHeader("Content-Transfer-Encoding", "binary");
-		resp.setHeader("Pragma", "no-cache");
-		resp.setHeader("Cache-Control", "private");
+		File target = new File(path + File.separator + fileDTO.getsName()); // 경로 + 구분자 + 파일명
 
 		try {
+			// response 파일 다운로드 헤더 정보 설정
+			resp.setContentType("application/octet-stream");
+			resp.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(fileDTO.getoName(), "utf-8"));
+			resp.setHeader("Content-Transfer-Encoding", "binary");
+			resp.setHeader("Pragma", "no-cache");
+			resp.setHeader("Cache-Control", "private");
+			
 			BufferedInputStream bis = new BufferedInputStream(new FileInputStream(target));
 			BufferedOutputStream bos = new BufferedOutputStream(resp.getOutputStream());
 			
