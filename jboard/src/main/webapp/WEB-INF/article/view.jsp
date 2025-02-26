@@ -22,12 +22,16 @@
                     </tr>
                     <tr>
                         <th>작성자</th>
-                        <td><input type="text" name="writer" value="${articleDTO.writer}" readonly/></td>
+                        <td><input type="text" name="writer" value="${articleDTO.writer}(${articleDTO.nick})" readonly/></td>
                     </tr>
                     <c:if test="${articleDTO.file > 0}">
 	                    <tr>
 	                        <th>파일</th>
-	                        <td><a href="#">2020년 상반기 매출자료.xls</a>&nbsp;<span>7</span>회 다운로드</td>
+	                        <td>
+	                        	<c:forEach var="file" items="${articleDTO.files}">
+	                        		<p style="margin-top:6px;"><a href="#">${file.oName}</a>&nbsp;<span>${file.download}</span>회 다운로드</p>
+	                        	</c:forEach>
+	                        </td>
 	                    </tr>
                     </c:if>
                     <tr>
