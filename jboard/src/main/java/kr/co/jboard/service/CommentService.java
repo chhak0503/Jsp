@@ -10,7 +10,7 @@ public enum CommentService {
 	INSTANCE;
 	private CommentDAO dao = CommentDAO.getInstance();
 	
-	public void registeComment(CommentDTO dto) {
+	public void registerComment(CommentDTO dto) {
 		dao.insertComment(dto);
 	}
 	

@@ -70,6 +70,14 @@ public class SQL {
 													+ "`regip`=?,"
 													+ "`wdate`=NOW()";
 	
+	// comment
+	public static final String INSERT_COMMENT = "insert into `comment` set "
+												+ "`parent`=?,"
+												+ "`content`=?,"
+												+ "`writer`=?,"
+												+ "`regip`=?,"
+												+ "`wdate`=NOW()";
+	
 	// file
 	public static final String INSERT_FILE = "insert into `file` set "
 												+ "`ano`=?,"
