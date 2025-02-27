@@ -78,6 +78,14 @@ public class SQL {
 												+ "`regip`=?,"
 												+ "`wdate`=NOW()";
 	
+	public static final String SELECT_ALL_COMMENT_BY_PARENT = "SELECT "
+																+ "c.*, "
+																+ "u.`nick` "
+																+ "FROM `comment` AS c "
+																+ "JOIN `user` AS u ON c.writer = u.uid "
+																+ "WHERE `parent`=? "
+																+ "ORDER BY `cno` ASC";
+	
 	// file
 	public static final String INSERT_FILE = "insert into `file` set "
 												+ "`ano`=?,"
