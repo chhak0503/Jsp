@@ -1,6 +1,10 @@
 package kr.co.jboard.controller.comment;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,6 +19,7 @@ public class WriteController extends HttpServlet {
 	private static final long serialVersionUID = -7924097624078436862L;
 	
 	private CommentService service = CommentService.INSTANCE;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,12 +39,20 @@ public class WriteController extends HttpServlet {
 		dto.setContent(content);
 		dto.setWriter(writer);
 		dto.setRegip(regip);
+		logger.debug(dto.toString());
 		
 		// 서비스 호출
 		service.registerComment(dto);
 		
-		// 리다이렉트 이동
-		resp.sendRedirect("/jboard/article/view.do?no="+parent);
+		// 리다이렉트 이동(폼태그를 이용해서 데이터를 전송할때)
+		//resp.sendRedirect("/jboard/article/view.do?no="+parent);
+		
+		// JSON 출력(Javascript fetch함수로 데이터를 전송할때)
+		String json = "{result:1}";
+		
+		PrintWriter printWriter = resp.getWriter();
+		printWriter.println(json);
+		
 	}
 }
 
