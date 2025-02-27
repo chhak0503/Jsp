@@ -11,6 +11,8 @@
     	document.addEventListener('DOMContentLoaded', function(){
     		console.log('DOMContentLoaded...');
     		
+    		const commentList = document.getElementsByClassName('commentList')[0];
+    		
     		// 댓글 등록
     		formComment.onsubmit = function(e){
     			e.preventDefault();
@@ -35,6 +37,27 @@
     			.then(response => response.json())
     			.then(data => {
     				console.log(data);
+    				
+    				// 동적 태그 생성
+    				if(data != null){
+    					
+    					alert('댓글이 등록 되었습니다.');
+    					
+    					const article = `<article>
+					                        <span class='date'>\${data.wdate}</span>
+					                        <span class='nick'>\${data.nick}</span>
+					                        <p class='content'>\${data.content}</p>
+					                        <div>
+					                            <a href='#' class='remove'>삭제</a>
+					                            <a href='#' class='modify'>수정</a>
+					                        </div>
+					                     </article>`;
+					                     
+    					commentList.insertAdjacentHTML('beforeend', article);    					
+    				}else{
+    					alert('댓글 등록 실패 했습니다.');
+    				}
+    				
     			})
     			.catch(err => {
     				console.log(err);

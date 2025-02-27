@@ -6,6 +6,9 @@ import java.io.PrintWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -42,17 +45,20 @@ public class WriteController extends HttpServlet {
 		logger.debug(dto.toString());
 		
 		// 서비스 호출
-		service.registerComment(dto);
+		int count = service.registerComment(dto);
 		
 		// 리다이렉트 이동(폼태그를 이용해서 데이터를 전송할때)
 		//resp.sendRedirect("/jboard/article/view.do?no="+parent);
 		
 		// JSON 출력(Javascript fetch함수로 데이터를 전송할때)
-		String json = "{result:1}";
-		
 		PrintWriter printWriter = resp.getWriter();
-		printWriter.println(json);
-		
+				
+		if(count > 0) {
+			// insert 성공
+			Gson gson = new Gson();
+			String json = gson.toJson(dto);
+			printWriter.println(json);
+		}
 	}
 }
 
