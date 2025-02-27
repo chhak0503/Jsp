@@ -45,7 +45,7 @@ public class WriteController extends HttpServlet {
 		logger.debug(dto.toString());
 		
 		// 서비스 호출
-		int count = service.registerComment(dto);
+		CommentDTO savedCommentDTO = service.registerComment(dto);
 		
 		// 리다이렉트 이동(폼태그를 이용해서 데이터를 전송할때)
 		//resp.sendRedirect("/jboard/article/view.do?no="+parent);
@@ -53,12 +53,9 @@ public class WriteController extends HttpServlet {
 		// JSON 출력(Javascript fetch함수로 데이터를 전송할때)
 		PrintWriter printWriter = resp.getWriter();
 				
-		if(count > 0) {
-			// insert 성공
-			Gson gson = new Gson();
-			String json = gson.toJson(dto);
-			printWriter.println(json);
-		}
+		Gson gson = new Gson();
+		String json = gson.toJson(savedCommentDTO);
+		printWriter.println(json);
 	}
 }
 

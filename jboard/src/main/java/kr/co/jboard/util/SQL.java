@@ -86,6 +86,13 @@ public class SQL {
 																+ "WHERE `parent`=? "
 																+ "ORDER BY `cno` ASC";
 	
+	public static final String SELECT_COMMENT_BY_CNO = "SELECT "
+														+ "c.*, "
+														+ "u.`nick` "
+														+ "FROM `comment` AS c "
+														+ "JOIN `user` AS u ON c.writer = u.uid "
+														+ "WHERE `cno`=?";
+	
 	// file
 	public static final String INSERT_FILE = "insert into `file` set "
 												+ "`ano`=?,"

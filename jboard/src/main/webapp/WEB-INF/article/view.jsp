@@ -43,6 +43,8 @@
     					
     					alert('댓글이 등록 되었습니다.');
     					
+    					// 입력 필드 비우기
+    					
     					const article = `<article>
 					                        <span class='date'>\${data.wdate}</span>
 					                        <span class='nick'>\${data.nick}</span>
@@ -53,7 +55,8 @@
 					                        </div>
 					                     </article>`;
 					                     
-    					commentList.insertAdjacentHTML('beforeend', article);    					
+    					commentList.insertAdjacentHTML('beforeend', article);
+    					
     				}else{
     					alert('댓글 등록 실패 했습니다.');
     				}
