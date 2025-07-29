@@ -11,7 +11,7 @@
 	
 	// 데이터베이스 INSERT
 	String host = "jdbc:oracle:thin:@localhost:1521:xe"; 
-	String user = "chhak0503"; 
+	String user = "chhak0503";
 	String pass = "1234";
 	
 	try {
