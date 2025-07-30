@@ -45,15 +45,14 @@
 		rs.close();
 		psmtDelete.close();
 		psmtSelect.close();
-		conn.close();		
+		conn.close();
 		
 	}catch(Exception e){
 		e.printStackTrace();
 	}
 	
 	// 저장된 파일 삭제
-	String path = application.getRealPath("/files");
-	
+	String path = application.getRealPath("/files");	
 	File savedFile = new File(path + File.separator + savedName);
 	
 	savedFile.delete();
