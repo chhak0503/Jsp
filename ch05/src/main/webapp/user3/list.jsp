@@ -12,7 +12,6 @@
 	String pass = "1234";	
 	
 	List<User1VO> users = new ArrayList<>();
-	//System.out.println("here1 : " + users);
 
 	try {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -22,9 +21,6 @@
 		
 		String sql = "SELECT * FROM USER1";
 		ResultSet rs = stmt.executeQuery(sql);
-		
-		System.out.println(rs);
-		
 		
 		while(rs.next()){
 			
@@ -36,8 +32,6 @@
 						
 			users.add(vo);
 		}
-		
-		System.out.println(users);
 		
 		rs.close();
 		stmt.close();
