@@ -19,16 +19,14 @@
 	props.put("mail.smtp.port", "465");
 	props.put("mail.smtp.auth", "true");
 	props.put("mail.smtp.ssl.enable", "true");
-	props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-	
-	String secret = "dkhbxtkrrbxpyncf";
-	
+	props.put("mail.smtp.ssl.trust", "smtp.gmail.com");		
 	
 	// Gmail SMTP 세션 생성
 	Session gmailSession = Session.getInstance(props, new Authenticator(){
 		
 		@Override
-		protected javax.mail.PasswordAuthentication getPasswordAuthentication(){			
+		protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
+			String secret = "dkhbxtkrrbxpyncf";
 			return new PasswordAuthentication(sender, secret);
 		}		
 	});
@@ -37,6 +35,7 @@
 	Message message = new MimeMessage(gmailSession);
 	
 	try {
+		// 메일 정보 설정
 		message.setFrom(new InternetAddress(sender, "보내는사람", "UTF-8"));
 		message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
 		message.setSubject(title);
@@ -44,6 +43,7 @@
 		
 		// 메일 발송
 		Transport.send(message);
+		
 	}catch(Exception e){
 		e.printStackTrace();
 	}
