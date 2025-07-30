@@ -49,7 +49,7 @@
 		e.printStackTrace();
 	}
 	
-	// response 헤더 정보 수정
+	// 다운로드를 위한 response 헤더 정보 수정
 	response.setContentType("application/octet-stream");
 	response.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(fileDTO.getoName(), "UTF-8"));
 	response.setHeader("Content-Transfer-Encoding", "binary");
