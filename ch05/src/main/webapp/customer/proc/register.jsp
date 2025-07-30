@@ -10,8 +10,7 @@
 	String name = request.getParameter("name");
 	String hp = request.getParameter("hp");
 	String address = request.getParameter("address");
-	String rdate = request.getParameter("rdate");
-	
+	String rdate = request.getParameter("rdate");	
 	
 	try {
 		// DBCP 커넥션풀 객체 가져오기
