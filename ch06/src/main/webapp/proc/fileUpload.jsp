@@ -11,9 +11,7 @@
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%	
-		
-	
+<%		
 	// 파일업로드 디렉터리 경로 생성
 	String path = application.getRealPath("/files");
 	
@@ -58,8 +56,7 @@
 		
 	}catch(Exception e){
 		e.printStackTrace();
-	}
-	
+	}	
 	
 	// 파일 목록 이동(리다이렉트)
 	response.sendRedirect("/ch06/fileDownload.jsp");
