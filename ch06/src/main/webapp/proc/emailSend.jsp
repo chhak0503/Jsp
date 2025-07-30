@@ -19,7 +19,9 @@
 	props.put("mail.smtp.port", "465");
 	props.put("mail.smtp.auth", "true");
 	props.put("mail.smtp.ssl.enable", "true");
-	props.put("mail.smtp.ssl.trust", "smtp.gmail.com");		
+	props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+	
+	String secret = "Gmail에서 신청한 본인 앱비밀번호 입력";
 	
 	// Gmail SMTP 세션 생성
 	Session gmailSession = Session.getInstance(props, new Authenticator(){
