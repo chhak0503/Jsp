@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<h3>Hello</h3>		
-		<p>Hello 페이지 입니다.</p>		
+		<p>Hello 페이지 입니다.</p>	
 				
 		<a href="/ch09">메인 이동</a>
 		<a href="/ch09/hello.do">hello</a>
