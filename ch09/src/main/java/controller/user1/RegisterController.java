@@ -17,11 +17,10 @@ public class RegisterController extends HttpServlet {
 
 	// Service 싱글톤 객체 가져오기
 	private User1Service service = User1Service.getInstance();
-	
-	
+		
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user1/register.jsp");
 		dispatcher.forward(req, resp);		
 	}
@@ -44,6 +43,9 @@ public class RegisterController extends HttpServlet {
 		
 		// 서비스 요청
 		service.register(dto);
+		
+		// 이동
+		resp.sendRedirect("/ch09/user1/list.do");
 		
 	}
 	
