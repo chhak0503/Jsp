@@ -22,6 +22,35 @@
   	<url-pattern>/hello.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>WelcomeServlet</servlet-name>
+  	<servlet-class>sub1.WelcomeServlet</servlet-class>  	
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>WelcomeServlet</servlet-name>
+  	<url-pattern>/welcome.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 필터 등록 -->
+  <filter>
+  	<filter-name>FilterA</filter-name>
+  	<filter-class>sub2.FilterA</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>FilterA</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+  	<filter-name>FilterB</filter-name>
+  	<filter-class>sub2.FilterB</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>FilterB</filter-name>
+  	<url-pattern>/hello.do</url-pattern>
+  	<url-pattern>/welcome.do</url-pattern>
+  </filter-mapping>
+  
 </web-app>
 
 
