@@ -24,7 +24,7 @@ public class DBHelper {
 		return ds.getConnection();		
 	}
 	
-	public void closeAll() throws SQLException {		
+	public void closeAll() throws SQLException {
 		
 		if(rs != null) {
 			rs.close();

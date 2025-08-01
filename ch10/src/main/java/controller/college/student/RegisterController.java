@@ -1,9 +1,6 @@
-package controller.shop.customer;
+package controller.college.student;
 
 import java.io.IOException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import dto.shop.CustomerDTO;
 import jakarta.servlet.RequestDispatcher;
@@ -12,24 +9,22 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import service.college.StudentService;
 import service.shop.CustomerService;
 
-@WebServlet("/shop/customer/register.do")
+@WebServlet("/college/student/register.do")
 public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
 	// 서비스 객체 가져오기
-	private CustomerService service = CustomerService.INSTANCE;
-	
-	// 로거 생성
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private StudentService service = StudentService.INSTANCE;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/shop/customer/register.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/college/student/register.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
@@ -50,9 +45,7 @@ public class RegisterController extends HttpServlet {
 		dto.setAddress(address);		
 		dto.setRdate(rdate);
 		
-		logger.info(dto.toString());
-		
-		service.register(dto);
+		//service.register(dto);
 		
 		resp.sendRedirect("/ch10/shop/customer/list.do");	
 	}	
