@@ -44,12 +44,10 @@ public class RegisterController extends HttpServlet {
 		dto.setAddress(address);		
 		dto.setRdate(rdate);
 		
+		service.register(dto);
 		
-		
-		
-		
-	}
-	
+		resp.sendRedirect("/ch10/shop/customer/list.do");	
+	}	
 }
 
 
