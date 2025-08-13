@@ -22,7 +22,7 @@
 		<c:if test="${not empty sessUser}">
 			<p>
 				${sessUser.name}(${sessUser.custid})님 반갑습니다.
-				<a href="#">로그아웃</a>
+				<a href="/shopApp/customer/logout.do">로그아웃</a>
 			</p>
 		</c:if>
 		
