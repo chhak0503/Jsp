@@ -1,8 +1,10 @@
 package controller.product;
 
 import java.io.IOException;
+import java.util.List;
 
 import dto.CustomerDTO;
+import dto.ProductDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,11 +12,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import service.ProductService;
 
 @WebServlet("/product/list.do")
 public class ListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private ProductService service = ProductService.INSTANCE;
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -22,8 +27,12 @@ public class ListController extends HttpServlet {
 		HttpSession session = req.getSession();		
 		CustomerDTO sessUser = (CustomerDTO) session.getAttribute("sessUser");
 		
+		// 상품목록 서비스 요청
+		List<ProductDTO> dtoList = service.findAll();		
+		
 		// request 공유(뷰(JSP)에서 참조)
 		req.setAttribute("sessUser", sessUser);
+		req.setAttribute("dtoList", dtoList);
 				
 		// 뷰 포워드
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/product/list.jsp");

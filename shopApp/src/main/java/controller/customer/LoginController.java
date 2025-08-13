@@ -41,11 +41,11 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("sessUser", customerDTO);
 			
 			// 상품목록 이동
-			resp.sendRedirect("/shopApp/product/list.do");
+			resp.sendRedirect("/shopApp/product/list.do?login=success");
 			
 		}else {
 			// 회원이 아니면 상품목록 이동			
-			resp.sendRedirect("/shopApp/product/list.do");			
+			resp.sendRedirect("/shopApp/product/list.do?login=fail");			
 		}
 	}	
 }
