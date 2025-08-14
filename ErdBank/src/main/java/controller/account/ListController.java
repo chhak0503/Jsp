@@ -23,6 +23,8 @@ public class ListController extends HttpServlet {
 	
 		List<AccountDTO> dtoList = service.findAll();
 		
+		System.out.println(dtoList);
+		
 		req.setAttribute("accounts", dtoList);
 		
 		

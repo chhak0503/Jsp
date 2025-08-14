@@ -22,7 +22,7 @@
 				<th>계좌개설일</th>
 				<th>작업</th>
 			</tr>
-			<c:forEach var="acc" items="${accouts}">
+			<c:forEach var="acc" items="${accounts}">
 				<tr>
 					<td>${acc.a_no}</td>
 					<td>${acc.a_item_dist}</td>
