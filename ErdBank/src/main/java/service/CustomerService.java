@@ -17,6 +17,10 @@ public enum CustomerService {
 	public CustomerDTO findById(String c_no) {
 		return dao.select(c_no);
 	}
+	
+	public CustomerDTO findByIdAndName(String c_no, String c_name) {
+		return dao.select(c_no, c_name);
+	}
 	public List<CustomerDTO> findAll() {
 		return dao.selectAll();
 	}
