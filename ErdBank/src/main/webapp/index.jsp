@@ -21,7 +21,7 @@
 				<table border="1">
 					<tr>
 						<td>주민번호</td>
-						<td><input type="text" name="c_no" placeholder="주민번호 입력 하세요"/></td>
+						<td><input type="text" name="c_no" placeholder="주민번호 입력 하세요" value="730423-1000001"/></td>
 					</tr>
 					<tr>
 						<td>이름</td>

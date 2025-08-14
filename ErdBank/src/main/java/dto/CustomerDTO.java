@@ -8,6 +8,16 @@ public class CustomerDTO {
 	private String c_phone;
 	private String c_addr;
 	
+	// 추가필드
+	private String c_a_no;
+	
+	public String getC_a_no() {
+		return c_a_no;
+	}
+	public void setC_a_no(String c_a_no) {
+		this.c_a_no = c_a_no;
+	}
+	
 	public String getC_no() {
 		return c_no;
 	}
