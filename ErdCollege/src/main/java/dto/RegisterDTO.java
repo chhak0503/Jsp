@@ -15,12 +15,22 @@ public class RegisterDTO {
 	public void setRegStdNo(String regStdNo) {
 		this.regStdNo = regStdNo;
 	}
+	
 	public int getRegLecNo() {
 		return regLecNo;
 	}
+	
 	public void setRegLecNo(int regLecNo) {
 		this.regLecNo = regLecNo;
 	}
+	
+	public void setRegLecNo(String regLecNo) {
+		
+		if(regLecNo != null) {
+			this.regLecNo = Integer.parseInt(regLecNo);	
+		}		
+	}
+	
 	public int getRegMidScore() {
 		return regMidScore;
 	}

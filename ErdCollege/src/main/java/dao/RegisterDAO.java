@@ -21,7 +21,25 @@ public class RegisterDAO extends DBHelper {
 	public List<RegisterDTO> selectAll() {
 		return null;
 	}
-	public void insert(RegisterDTO dto) {}
+	
+	public void insert(RegisterDTO dto) {
+		
+		try {
+			conn = getConnection();
+			
+			String sql = "INSERT INTO REGISTER (REGSTDNO, REGLECNO) VALUES (?,?)";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getRegStdNo());
+			psmt.setInt(2, dto.getRegLecNo());			
+			psmt.executeUpdate();
+			
+			closeAll();			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public void update(RegisterDTO dto) {}
 	public void delete(int regStdNo, int regLecNo) {}
 }

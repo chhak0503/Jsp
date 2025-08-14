@@ -29,7 +29,7 @@
 					<td>${dto.lecTime}</td>
 					<td>${dto.lecClass}</td>
 					<td>
-						<a href="">수강신청</a>
+						<a href="/ErdCollege/register/request.do?lecNo=${dto.lecNo}">수강신청</a>
 					</td>
 				</tr>
 			</c:forEach>	

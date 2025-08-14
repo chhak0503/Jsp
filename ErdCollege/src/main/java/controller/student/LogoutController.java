@@ -23,6 +23,7 @@ public class LogoutController extends HttpServlet {
 		
 		// 로그아웃 처리
 		HttpSession session = req.getSession();
+		
 		session.removeAttribute("sessStudent");
 		session.invalidate();
 		
