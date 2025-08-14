@@ -20,8 +20,7 @@
 				<th>시간</th>
 				<th>강의실</th>
 				<th>관리</th>
-			</tr>			
-			
+			</tr>
 			<c:forEach var="dto" items="${dtoList}">
 				<tr>
 					<td>${dto.lecNo}</td>
@@ -29,9 +28,8 @@
 					<td>${dto.lecCredit}</td>
 					<td>${dto.lecTime}</td>
 					<td>${dto.lecClass}</td>
-					<td>					
-						<a href="">수정</a>					
-						<a href="">삭제</a>
+					<td>
+						<a href="">수강신청</a>
 					</td>
 				</tr>
 			</c:forEach>	
