@@ -9,6 +9,17 @@ public class AccountDTO {
 	private int a_balance;
 	private String a_open_date;
 	
+	// 추가필드
+	private String a_c_name;
+	
+	public String getA_c_name() {
+		return a_c_name;
+	}
+	public void setA_c_name(String a_c_name) {
+		this.a_c_name = a_c_name;
+	}
+	
+	
 	public String getA_no() {
 		return a_no;
 	}

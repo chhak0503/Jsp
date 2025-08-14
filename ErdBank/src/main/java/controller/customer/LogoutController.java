@@ -14,8 +14,8 @@ import service.CustomerService;
 
 @WebServlet("/customer/logout.do")
 public class LogoutController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 	
+	private static final long serialVersionUID = 1L;
 		
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

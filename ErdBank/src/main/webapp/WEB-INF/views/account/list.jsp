@@ -14,22 +14,27 @@
 		
 		<table border="1">
 			<tr>
-				<th>강좌번호</th>
-				<th>강좌명</th>
-				<th>학점</th>
-				<th>시간</th>
-				<th>강의실</th>
-				<th>관리</th>
+				<th>계좌번호</th>
+				<th>계좌종류</th>
+				<th>계좌 상품명</th>
+				<th>입금주</th>
+				<th>현재잔액</th>
+				<th>계좌개설일</th>
+				<th>작업</th>
 			</tr>
-			<c:forEach var="dto" items="${dtoList}">
+			<c:forEach var="acc" items="${accouts}">
 				<tr>
-					<td>${dto.lecNo}</td>
-					<td>${dto.lecName}</td>
-					<td>${dto.lecCredit}</td>
-					<td>${dto.lecTime}</td>
-					<td>${dto.lecClass}</td>
+					<td>${acc.a_no}</td>
+					<td>${acc.a_item_dist}</td>
+					<td>${acc.a_item_name}</td>
+					<td>${acc.a_c_name}(${acc.a_c_no})</td>
+					<td>${acc.a_balance}</td>
+					<td>${acc.a_open_date}</td>
 					<td>
-						<a href="/ErdCollege/register/request.do?lecNo=${dto.lecNo}">수강신청</a>
+						<a href="#">입금</a>
+						<a href="#">출금</a>
+						<a href="#">조회</a>
+						<a href="#">이체</a>
 					</td>
 				</tr>
 			</c:forEach>	
