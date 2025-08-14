@@ -39,7 +39,7 @@
 		<c:if test="${not empty sessionScope.sessCustomer}">
 			<p>
 				${sessCustomer.c_name}(${sessCustomer.c_no})님 반갑습니다. 서비스를 이용하시기 바랍니다.<br/>
-				<a href="#">로그아웃</a>				
+				<a href="/ErdBank/customer/logout.do">로그아웃</a>				
 			</p>
 		 
 			<a href="/ErdBank/account/list.do">계좌목록</a>
