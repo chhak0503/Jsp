@@ -14,25 +14,27 @@
 		
 		<table border="1">
 			<tr>
-				<th>아이디</th>
-				<th>이름</th>
-				<th>휴대폰</th>
-				<th>주소</th>
-				<th>가입일</th>
+				<th>강좌번호</th>
+				<th>강좌명</th>
+				<th>학점</th>
+				<th>시간</th>
+				<th>강의실</th>
 				<th>관리</th>
 			</tr>			
 			
-			<tr>
-				<td>a101</td>
-				<td>홍길동</td>
-				<td>010-1212-1111</td>
-				<td>부산</td>
-				<td>2000-10-01</td>
-				<td>					
-					<a href="">수정</a>					
-					<a href="">삭제</a>
-				</td>
-			</tr>			
+			<c:forEach var="dto" items="${dtoList}">
+				<tr>
+					<td>${dto.lecNo}</td>
+					<td>${dto.lecName}</td>
+					<td>${dto.lecCredit}</td>
+					<td>${dto.lecTime}</td>
+					<td>${dto.lecClass}</td>
+					<td>					
+						<a href="">수정</a>					
+						<a href="">삭제</a>
+					</td>
+				</tr>
+			</c:forEach>	
 		</table>		
 	</body>
 </html>
