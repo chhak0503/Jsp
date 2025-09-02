@@ -26,7 +26,7 @@
 											<td>\${user.age}</td>
 											<td>
 												<a href='#' class='modify' data-uid='\${user.user_id}'>수정</a>
-												<a href='#' class='remove'>삭제</a>
+												<a href='#' class='remove' data-uid='\${user.user_id}'>삭제</a>
 											</td>
 										</tr>`;									
 							
@@ -57,6 +57,42 @@
 						location.href = '/ch09/js/user1/modify.do?uid='+uid;
 					}
 					
+					
+					// 삭제 클릭
+					if(e.target.classList == 'remove'){
+						
+						// 삭제 예정 문서객체 
+						const tr = e.target.closest('tr');
+						
+						// 삭제 아이디 가져오기
+						const uid = e.target.dataset.uid;
+						
+						// 삭제 요청하기
+						fetch('/ch09/js/user1/delete.do?uid='+uid)
+							.then(res => res.json())
+							.then(data => {
+								console.log(data);
+								
+								if(data.result > 0){
+									alert('삭제 완료!');
+								}else {
+									alert('삭제 실패!');
+								}
+								
+								// 새로고침() -> 불필요한 요청이 발생
+								//location.reload();
+								
+								// 삭제한 문서객체 제거
+								tr.remove();
+								
+								
+							})
+							.catch(err => {
+								console.log(err);
+							});
+						
+						
+					}
 					
 					
 				});

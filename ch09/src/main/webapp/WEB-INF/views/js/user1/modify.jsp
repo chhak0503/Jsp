@@ -57,24 +57,22 @@
 						.then(res => res.json())
 						.then(data => {
 							console.log(data);
+							
+							if(data.result > 0){
+								alert('수정 되었습니다.');								
+							}else{
+								alert('수정 실패 했습니다.');
+							}
+							
+							location.href = '/ch09/js/user1/list.do';
 						})
 						.catch(err => {
 							console.log(err);
 						});
-					
-					
-					
 				});
 				
-				
-				
 			}); // DOMContentLoaded 끝
-		
-		
-		
 		</script>
-		
-		
 	</head>
 	<body>
 		<h3>JS/User1 수정</h3>
