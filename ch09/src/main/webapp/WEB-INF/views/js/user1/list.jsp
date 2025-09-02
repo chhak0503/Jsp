@@ -25,7 +25,7 @@
 											<td>\${user.hp}</td>
 											<td>\${user.age}</td>
 											<td>
-												<a href='#' class='modify'>수정</a>
+												<a href='#' class='modify' data-uid='\${user.user_id}'>수정</a>
 												<a href='#' class='remove'>삭제</a>
 											</td>
 										</tr>`;									
@@ -36,7 +36,33 @@
 					.catch(err => {
 						console.log(err);
 					});
-			});		
+				
+				/*
+					동적 이벤트 처리
+					 - 동적으로 생성되는 태그는 이벤트처리를 할 수 없음
+					 - 동적 이벤트 처리를 위해 document 문서객체로 이벤트 구현
+					 - 특정 문서객체를 대상으로 이벤트 처리
+				*/ 
+				document.addEventListener('click', function(e){
+					e.preventDefault();
+					
+					
+					// 수정 클릭
+					if(e.target.classList == 'modify'){						
+						
+						// 사용자 정의 속성(data-로 시작하는)으로 수정 아이디 가져오기
+						const uid = e.target.dataset.uid;
+						
+						// 수정 페이지 이동
+						location.href = '/ch09/js/user1/modify.do?uid='+uid;
+					}
+					
+					
+					
+				});
+				
+				
+			});	// DOMContentLoaded 끝	
 		</script>		
 	</head>
 	<body>
