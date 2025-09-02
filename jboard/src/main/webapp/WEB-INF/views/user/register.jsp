@@ -100,18 +100,17 @@
 				.then(data => {
 					console.log(data);
 					if(data.count > 0){
-						emailResult.innerText = '이미 사용 중인 휴대폰 입니다.';
-						emailResult.style.color = 'red';
+						hpResult.innerText = '이미 사용 중인 휴대폰 입니다.';
+						hpResult.style.color = 'red';
 					}else{
-						emailResult.innerText = '사용 가능한 휴대폰 입니다.';
-						emailResult.style.color = 'green';
+						hpResult.innerText = '사용 가능한 휴대폰 입니다.';
+						hpResult.style.color = 'green';
 					}
 				})
 				.catch(err => {
 					console.log(err);
 				});
 		});
-		
 	});
 </script>
 
