@@ -27,6 +27,14 @@ public class CheckUserController extends HttpServlet {
 		
 		int count = userService.getUserCount(col, value);
 		
+		
+		// 이메일 인증코드 전송 서비스 요청
+		if(col.equals("email") && count == 0) {
+			userService.sendEmailCode(value);			
+		}
+		
+		
+		
 		// JSON 생성
 		JsonObject json = new JsonObject();
 		json.addProperty("count", count);		

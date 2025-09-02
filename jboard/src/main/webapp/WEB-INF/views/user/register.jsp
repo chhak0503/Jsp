@@ -1,23 +1,27 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_head.jsp" %>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/jboard/js/postcode.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function(){
 		
 		const btnCheckUid = document.getElementById('btnCheckUid');
 		const btnCheckNick = document.getElementById('btnCheckNick');
 		const btnCheckEmail = document.getElementById('btnCheckEmail');
+		const btnEmailCode = document.getElementById('btnEmailCode');
 
 		const uidResult = document.getElementsByClassName('uidResult')[0];
 		const nickResult = document.getElementsByClassName('nickResult')[0];
 		const emailResult = document.getElementsByClassName('emailResult')[0];
 		const hpResult = document.getElementsByClassName('hpResult')[0];
 		
+		const auth = document.getElementsByClassName('auth')[0];
+		
 		const form = document.getElementsByTagName('form')[0];
 		
 		// 아이디 중복체크 요청
 		btnCheckUid.addEventListener('click', function(e){
-			
-			
+						
 			const uid = form.uid.value;
 			
 			console.log('uid : ' + uid);
@@ -80,14 +84,26 @@
 						emailResult.innerText = '이미 사용 중인 이메일 입니다.';
 						emailResult.style.color = 'red';
 					}else{
-						emailResult.innerText = '사용 가능한 이메일 입니다.';
+						emailResult.innerText = '이메일 인증번호를 입력하세요.';
 						emailResult.style.color = 'green';
+						
+						// 인증번호 입력 필드 띄우기
+						auth.style.display = 'block';						
+						
 					}
 				})
 				.catch(err => {
 					console.log(err);
 				});
 		});
+		
+		// 이메일 코드 전송 버튼 클릭
+		btnEmailCode.addEventListener('click', function(e){
+			
+			alert('click!');
+			
+		});
+		
 		
 		// 휴대폰 중복 체크 
 		form.hp.addEventListener('focusout', function(e){
@@ -111,7 +127,14 @@
 					console.log(err);
 				});
 		});
-	});
+	}); // DOMContentLoaded 끝
+	
+	
+	
+	
+	
+	
+	
 </script>
 
 <main id="user">
@@ -162,7 +185,7 @@
                         <span class="emailResult"></span>
                         <div class="auth">
                             <input type="text" name="auth" placeholder="인증번호 입력"/>
-                            <button type="button"><img src="../images/chk_confirm.gif" alt="확인"/></button>
+                            <button type="button" id="btnEmailCode"><img src="../images/chk_confirm.gif" alt="확인"/></button>
                         </div>
                     </td>
                 </tr>
@@ -176,10 +199,10 @@
                 <tr>
                     <td>주소</td>
                     <td>
-                        <input type="text" name="zip" placeholder="우편번호"/>
-                        <button type="button"><img src="../images/chk_post.gif" alt="우편번호찾기"/></button>
-                        <input type="text" name="addr1" placeholder="주소 검색"/>
-                        <input type="text" name="addr2" placeholder="상세주소 입력"/>
+                        <input type="text" id="zip" name="zip" readonly="readonly" placeholder="우편번호"/>
+                        <button type="button" onclick="postcode()"><img src="../images/chk_post.gif" alt="우편번호찾기"/></button>
+                        <input type="text" id="addr1" name="addr1" placeholder="주소 검색"/>
+                        <input type="text" id="addr2" name="addr2" placeholder="상세주소 입력"/>
                     </td>
                 </tr>
             </table>
