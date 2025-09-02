@@ -1,8 +1,36 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_head.jsp" %>
+<script>
+	document.addEventListener('DOMContentLoaded', function(){
+		
+		const btnCheckUid = document.getElementById('btnCheckUid');
+		const form = document.getElementsByTagName('form')[0];
+		
+		btnCheckUid.addEventListener('click', function(e){
+			
+			// 아이디 중복체크 요청
+			const uid = form.uid.value;
+			
+			console.log('uid : ' + uid);
+			
+			fetch('')
+				.then(res => res.json())
+				.then(data => {
+					console.log(data);
+				})
+				.catch(err => {
+					console.log(err);
+				});
+			
+			
+		});
+		
+		
+	});
+</script>
+
 <main id="user">
     <section class="register">
-
         <form action="/jboard/user/register.do" method="post">
             <h2 class="tit">사이트 이용정보 입력</h2>
             <table border="1">                        
@@ -10,7 +38,7 @@
                     <td>아이디</td>
                     <td>
                         <input type="text" name="uid" placeholder="아이디 입력"/>
-                        <button type="button"><img src="../images/chk_id.gif" alt="중복확인"/></button>
+                        <button type="button" id="btnCheckUid"><img src="../images/chk_id.gif" alt="중복확인"/></button>
                         <span class="uidResult"></span>
                     </td>
                 </tr>

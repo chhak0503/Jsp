@@ -14,6 +14,9 @@ public enum UserService {
 	public void register(UserDTO dto) {
 		dao.insert(dto);
 	}	
+	public int getUserCount(String col, String value) {
+		return dao.selectCount(col, value);
+	}
 	public UserDTO findById(String usid) {
 		return dao.select(usid);
 	}

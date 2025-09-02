@@ -39,6 +39,40 @@ public class UserDAO extends DBHelper {
 		}		
 	}
 	
+	public int selectCount(String col, String value) {
+		
+		int count = 0;
+		
+		try {
+			conn = getConnection();
+			
+			StringBuilder sql = new StringBuilder(Sql.SELECT_COUNT);
+			
+			if(col.equals("uid")) {
+				sql.append(Sql.WHERE_USID);
+			}else if(col.equals("nick")) {
+				sql.append(Sql.WHERE_NICK);
+			}else if(col.equals("email")) {
+				sql.append(Sql.WHERE_EMAIL);
+			}else if(col.equals("hp")){
+				sql.append(Sql.WHERE_HP);
+			}			
+			psmt= conn.prepareStatement(sql.toString());
+			psmt.setString(1, value);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			closeAll();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}	
+		
+		return count;
+	}
+	
 	public UserDTO select(String usid) {
 		return null;
 	}
