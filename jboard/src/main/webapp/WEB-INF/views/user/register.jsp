@@ -4,27 +4,113 @@
 	document.addEventListener('DOMContentLoaded', function(){
 		
 		const btnCheckUid = document.getElementById('btnCheckUid');
+		const btnCheckNick = document.getElementById('btnCheckNick');
+		const btnCheckEmail = document.getElementById('btnCheckEmail');
+
+		const uidResult = document.getElementsByClassName('uidResult')[0];
+		const nickResult = document.getElementsByClassName('nickResult')[0];
+		const emailResult = document.getElementsByClassName('emailResult')[0];
+		const hpResult = document.getElementsByClassName('hpResult')[0];
+		
 		const form = document.getElementsByTagName('form')[0];
 		
+		// 아이디 중복체크 요청
 		btnCheckUid.addEventListener('click', function(e){
 			
-			// 아이디 중복체크 요청
+			
 			const uid = form.uid.value;
 			
 			console.log('uid : ' + uid);
 			
-			fetch('')
+			fetch('/jboard/user/check.do?col=uid&value='+uid)
 				.then(res => res.json())
 				.then(data => {
 					console.log(data);
+					if(data.count > 0){
+						uidResult.innerText = '이미 사용 중인 아이디 입니다.';
+						uidResult.style.color = 'red';
+					}else{
+						uidResult.innerText = '사용 가능한 아이디 입니다.';
+						uidResult.style.color = 'green';
+					}
 				})
 				.catch(err => {
 					console.log(err);
 				});
-			
-			
 		});
 		
+		// 별명 중복체크 요청
+		btnCheckNick.addEventListener('click', function(e){
+						
+			const value = form.nick.value;
+			
+			console.log('value : ' + value);
+			
+			fetch('/jboard/user/check.do?col=nick&value='+value)
+				.then(res => res.json())
+				.then(data => {
+					console.log(data);
+					if(data.count > 0){
+						nickResult.innerText = '이미 사용 중인 별명 입니다.';
+						nickResult.style.color = 'red';
+					}else{
+						nickResult.innerText = '사용 가능한 별명 입니다.';
+						nickResult.style.color = 'green';
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		});
+		
+		
+		// 이메일 중복체크 요청
+		btnCheckEmail.addEventListener('click', function(e){
+			
+			
+			const value = form.email.value;
+			
+			console.log('value : ' + value);
+			
+			fetch('/jboard/user/check.do?col=email&value='+value)
+				.then(res => res.json())
+				.then(data => {
+					console.log(data);
+					if(data.count > 0){
+						emailResult.innerText = '이미 사용 중인 이메일 입니다.';
+						emailResult.style.color = 'red';
+					}else{
+						emailResult.innerText = '사용 가능한 이메일 입니다.';
+						emailResult.style.color = 'green';
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		});
+		
+		// 휴대폰 중복 체크 
+		form.hp.addEventListener('focusout', function(e){
+			const value = form.hp.value;
+			
+			console.log('value : ' + value);
+			
+			fetch('/jboard/user/check.do?col=hp&value='+value)
+				.then(res => res.json())
+				.then(data => {
+					console.log(data);
+					if(data.count > 0){
+						emailResult.innerText = '이미 사용 중인 휴대폰 입니다.';
+						emailResult.style.color = 'red';
+					}else{
+						emailResult.innerText = '사용 가능한 휴대폰 입니다.';
+						emailResult.style.color = 'green';
+					}
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		});
 		
 	});
 </script>
@@ -65,7 +151,7 @@
                     <td>
                         <p class="nickInfo">공백없는 한글, 영문, 숫자 입력</p>
                         <input type="text" name="nick" placeholder="별명 입력"/>
-                        <button type="button"><img src="../images/chk_id.gif" alt="중복확인"/></button>
+                        <button type="button" id="btnCheckNick"><img src="../images/chk_id.gif" alt="중복확인"/></button>
                         <span class="nickResult"></span>
                     </td>
                 </tr>
@@ -73,7 +159,8 @@
                     <td>이메일</td>
                     <td>
                         <input type="email" name="email" placeholder="이메일 입력"/>
-                        <button type="button"><img src="../images/chk_auth.gif" alt="인증번호 받기"/></button>
+                        <button type="button" id="btnCheckEmail"><img src="../images/chk_auth.gif" alt="인증번호 받기"/></button>
+                        <span class="emailResult"></span>
                         <div class="auth">
                             <input type="text" name="auth" placeholder="인증번호 입력"/>
                             <button type="button"><img src="../images/chk_confirm.gif" alt="확인"/></button>
@@ -82,7 +169,10 @@
                 </tr>
                 <tr>
                     <td>휴대폰</td>
-                    <td><input type="text" name="hp" placeholder="휴대폰 입력"/></td>
+                    <td>
+                    	<input type="text" name="hp" placeholder="휴대폰 입력"/>
+                    	<span class="hpResult"></span>
+                    </td>
                 </tr>
                 <tr>
                     <td>주소</td>
