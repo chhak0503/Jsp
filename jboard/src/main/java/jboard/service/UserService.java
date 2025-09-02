@@ -19,11 +19,10 @@ public enum UserService {
 	
 	INSTANCE;
 	
-	
-	private final String SENDER = "chhak0503@gmail.com"; 
 	private UserDAO dao = UserDAO.getInstance();
+	private final String SENDER = "chhak0503@gmail.com";
 	
-	public void sendEmailCode(String email) {
+	public String sendEmailCode(String email) {
 		// Gmail SMTP 서버 설정
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -33,7 +32,7 @@ public enum UserService {
 		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 		
 		// 6자리 인증코드 생성
-		int code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+		int code = ThreadLocalRandom.current().nextInt(100000, 1000000);		
 				
 		String title = "jboard 회원가입 이메일 인증코드";
 		String content = "인증코드는 " + code + " 입니다.";
@@ -64,6 +63,8 @@ public enum UserService {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
+		return String.valueOf(code);
 	}
 	
 	public void register(UserDTO dto) {

@@ -69,17 +69,31 @@
 		
 		
 		// 이메일 중복체크 요청
+		let preventDblClick = false;
+		
 		btnCheckEmail.addEventListener('click', function(e){
-			
-			
-			const value = form.email.value;
-			
+						
+			// 이중 클릭 방지
+			if(preventDblClick){
+				return;
+			}
+						
+			const value = form.email.value;			
 			console.log('value : ' + value);
+			
+			// 이중 클릭 방지 실행
+			preventDblClick = true;
+			emailResult.innerText = '이메일로 인증코드 전송 중 입니다.';
+			emailResult.style.color = 'green';
 			
 			fetch('/jboard/user/check.do?col=email&value='+value)
 				.then(res => res.json())
 				.then(data => {
 					console.log(data);
+					
+					// 이중 클릭 방지 해제
+					preventDblClick = false;
+					
 					if(data.count > 0){
 						emailResult.innerText = '이미 사용 중인 이메일 입니다.';
 						emailResult.style.color = 'red';
@@ -98,10 +112,29 @@
 		});
 		
 		// 이메일 코드 전송 버튼 클릭
-		btnEmailCode.addEventListener('click', function(e){
+		btnEmailCode.addEventListener('click', async function(e){
 			
-			alert('click!');
+			const code = form.auth.value;
 			
+			// 쿼리 문자열 생성해서 POST body로 전송
+			const params = new URLSearchParams();
+			params.append("code", code);
+			
+			const response = await fetch('/jboard/user/check.do', {
+				method: 'POST',				
+				body: params
+			});
+			
+			const data = await response.json();
+			
+			console.log(data);
+			if(data.result > 0){
+				emailResult.innerText = '이메일이 인증되었습니다.';
+				emailResult.style.color = 'green';				
+			}else{
+				emailResult.innerText = '인증코드가 일치 않습니다.';
+				emailResult.style.color = 'red';
+			}
 		});
 		
 		
