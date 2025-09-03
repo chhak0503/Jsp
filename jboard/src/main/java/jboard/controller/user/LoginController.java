@@ -59,10 +59,7 @@ public class LoginController extends HttpServlet {
 			// 회원이 아니면 로그인 이동
 			resp.sendRedirect("/jboard/user/login.do?code=100");
 		}
-		
-		
 	}
-
 }
 
 
