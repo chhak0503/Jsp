@@ -1,5 +1,6 @@
 package jboard.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -20,9 +21,14 @@ public class ArticleDAO extends DBHelper {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	
-	public void insert(ArticleDTO dto) {
+	public int insert(ArticleDTO dto) {
+		
+		int ano = 0;
+		
 		try {
 			conn = getConnection();
+			
+			conn.setAutoCommit(false); // 트랜잭션 시작			
 			psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
@@ -30,10 +36,27 @@ public class ArticleDAO extends DBHelper {
 			psmt.setString(4, dto.getWriter());
 			psmt.setString(5, dto.getReg_ip());
 			psmt.executeUpdate();
+			
+			// 방금 INSERT한 글 번호 조회
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_MAX_ANO);
+			
+			if(rs.next()) {
+				ano = rs.getInt(1);
+			}			
+			conn.commit(); // 작업완료
 			closeAll();			
-		}catch (Exception e) {
+		}catch (Exception e) {			
 			logger.error(e.getMessage());
+			
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				logger.error(e1.getMessage());
+			}
 		}
+		
+		return ano;
 	}
 	
 	public ArticleDTO select(int ano) {

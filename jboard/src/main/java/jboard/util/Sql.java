@@ -22,10 +22,12 @@ public class Sql {
 
 	
 	// article
+	public static final String SELECT_MAX_ANO = "SELECT MAX(ANO) FROM TB_ARTICLE";
 	public static final String INSERT_ARTICLE = "INSERT INTO TB_ARTICLE (TITLE, CONTENT, FILE_CNT, WRITER, REG_IP, WDATE) VALUES (?, ?, ?, ?, ?, SYSDATE)";
 	
 	
-	
+	// file
+	public static final String INSERT_FILE = "INSERT INTO TB_FILE (ANO, ONAME, SNAME, RDATE) VALUES (?, ?, ?, SYSDATE)";
 	
 	
 	

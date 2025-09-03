@@ -1,6 +1,7 @@
 package jboard.controller.article;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jboard.dto.ArticleDTO;
+import jboard.dto.FileDTO;
 import jboard.service.ArticleService;
 import jboard.service.FileService;
 import jboard.util.ResultCode;
@@ -42,7 +44,8 @@ public class WriteController extends HttpServlet {
 		String regip = req.getRemoteAddr();
 		
 		// 첨부파일 업로드
-		int count = fileService.fileUpload(req);
+		List<FileDTO> files = fileService.fileUpload(req);
+		int count = files.size();
 		
 		ArticleDTO dto = new ArticleDTO();
 		dto.setTitle(title);
@@ -52,10 +55,22 @@ public class WriteController extends HttpServlet {
 		dto.setReg_ip(regip);
 		
 		logger.debug(dto.toString());
-				
-		articleService.register(dto);
 		
-		resp.sendRedirect("/jboard/article/list.do?code="+ResultCode.WRITER_SUCCESS.getCode());
+		// 글 등록
+		int ano = articleService.register(dto);
+		
+		// 파일 등록
+		for(FileDTO file : files) {
+			// fileDTO 생성
+			FileDTO fileDTO = new FileDTO();
+			fileDTO.setAno(ano);
+			fileDTO.setOname(file.getOname());
+			fileDTO.setSname(file.getSname());
+			
+			fileService.register(fileDTO);
+		}
+		
+		resp.sendRedirect("/jboard/article/list.do?code="+ResultCode.WRITE_SUCCESS.getCode());
 	}
 }
 
