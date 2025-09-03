@@ -22,9 +22,35 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-		List<ArticleDTO> dtoList = articleService.findAll();
+		// 요청 페이지 번호 수신
+		String pg = req.getParameter("pg");
+				
+		// 전체 게시물 갯수 구하기
+		int total = articleService.getCountTotal();
+		
+		// 마지막 페이지번호 구하기
+		int lastPageNum = 0;
+		
+		if(total % 10 == 0) {
+			lastPageNum = total / 10;	  // 10으로 나누어 떨어지면
+		}else {
+			lastPageNum = total / 10 + 1; // 10으로 나누어 떨어지지 않음
+		}		
+	
+		// 현재 페이지 번호 시작값 구하기
+		int page = 1;
+		
+		if(pg != null) {
+			page = Integer.parseInt(pg);	
+		}
+		
+		int start = (page - 1) * 10;
+		
+		
+		List<ArticleDTO> dtoList = articleService.findAll(start);
 		
 		req.setAttribute("dtoList", dtoList);
+		req.setAttribute("lastPageNum", lastPageNum);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/article/list.jsp");
 		dispatcher.forward(req, resp);
