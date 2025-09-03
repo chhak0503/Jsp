@@ -22,6 +22,8 @@ public class Sql {
 
 	
 	// article
+	public static final String SELECT_ARTICLE_ALL = "SELECT * FROM TB_ARTICLE";
+	
 	public static final String SELECT_MAX_ANO = "SELECT MAX(ANO) FROM TB_ARTICLE";
 	public static final String INSERT_ARTICLE = "INSERT INTO TB_ARTICLE (TITLE, CONTENT, FILE_CNT, WRITER, REG_IP, WDATE) VALUES (?, ?, ?, ?, ?, SYSDATE)";
 	
