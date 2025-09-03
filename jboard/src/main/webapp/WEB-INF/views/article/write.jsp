@@ -5,7 +5,7 @@
         <nav>
             <h1>글쓰기</h1>
         </nav>
-        <form action="/jboard/article/write.do" method="post">
+        <form action="/jboard/article/write.do" method="post" enctype="multipart/form-data">
         	<input type="hidden" name="writer" readonly value="${sessUser.usid}">
             <table border="0">                        
                 <tr>

@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jboard.dto.ArticleDTO;
 import jboard.service.ArticleService;
+import jboard.service.FileService;
 import jboard.util.ResultCode;
 
 @WebServlet("/article/write.do")
@@ -23,6 +24,7 @@ public class WriteController extends HttpServlet {
 	private Logger logger = LoggerFactory.getLogger(this.getClass()); 
 	
 	private ArticleService articleService = ArticleService.INSTANCE;
+	private FileService fileService = FileService.INSTANCE;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,6 +40,9 @@ public class WriteController extends HttpServlet {
 		String content = req.getParameter("content");
 		String writer = req.getParameter("writer");
 		String regip = req.getRemoteAddr();
+		
+		// 첨부파일 업로드
+		fileService.fileUpload(req);
 		
 		ArticleDTO dto = new ArticleDTO();
 		dto.setTitle(title);
