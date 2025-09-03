@@ -1,6 +1,7 @@
 package jboard.service;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,30 +39,25 @@ public enum FileService {
 				
 		try {
 			// 업로드 파일 Part(업로드된 파일) 첨부 파일에서 가져오기
-			Part part1 = req.getPart("file1");	
-			Part part2 = req.getPart("file2");	
+			Collection<Part> parts = req.getParts();
 			
-			// 파일명 추출
-			String oriName1 = part1.getSubmittedFileName();	
-			String oriName2 = part2.getSubmittedFileName();	
-			
-					
-			// 중복되지 않는 파일명 생성	
-			String ext1 = oriName1.substring(oriName1.lastIndexOf("."));	
-			String ext2 = oriName2.substring(oriName2.lastIndexOf("."));	
-			String savedName1 = UUID.randomUUID().toString() + ext1;
-			String savedName2 = UUID.randomUUID().toString() + ext2;
-			
-			// 파일 저장(경로 + 구분자 + 중복되지 않는 파일명)
-			part1.write(path + File.separator + savedName1);
-			part2.write(path + File.separator + savedName2);
+			for(Part part : parts) {
+				
+				// 파일명 추출
+				String oriName = part.getSubmittedFileName();
+				logger.debug("oriName : " + oriName);	
+				
+				// 중복되지 않는 파일명 생성	
+				String ext = oriName.substring(oriName.lastIndexOf("."));	
+				String savedName = UUID.randomUUID().toString() + ext;
+				
+				// 파일 저장(경로 + 구분자 + 중복되지 않는 파일명)
+				part.write(path + File.separator + savedName);
+			}			
 			
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
-		
-		
 	}
 	
 	public void fileDownload() {}
