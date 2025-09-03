@@ -47,10 +47,24 @@ public class ListController extends HttpServlet {
 		int start = (page - 1) * 10;
 		
 		
+		// 현재 페이지 그룹 구하기
+		int currentPageGroup = (int) Math.ceil(page / 10.0);
+		int pageGroupStart = (currentPageGroup - 1) * 10 + 1;
+		int pageGroupEnd = currentPageGroup * 10;
+		
+		if(pageGroupEnd > lastPageNum) {
+			pageGroupEnd = lastPageNum;
+		}		
+		
+		// 글 목록 조회
 		List<ArticleDTO> dtoList = articleService.findAll(start);
 		
+		// request 공유참조(JSP에서 출력)
 		req.setAttribute("dtoList", dtoList);
 		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("pageGroupStart", pageGroupStart);
+		req.setAttribute("pageGroupEnd", pageGroupEnd);
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/article/list.jsp");
 		dispatcher.forward(req, resp);
