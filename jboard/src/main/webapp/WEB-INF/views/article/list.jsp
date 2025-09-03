@@ -6,7 +6,7 @@
         <nav>
             <h1>
                 전체 글목록
-                <span>1012건</span>
+                <span>${total}건</span>
             </h1>
             <form action="./searchList.html">
                 <select name="searchType">
@@ -29,21 +29,26 @@
             </tr>
             <c:forEach var="article" items="${dtoList}">
 	            <tr>
-	                <td>${article.ano}</td>
+	                <td>${currentPageStartNum}</td>
 	                <td><a href="/jboard/article/view.do">${article.title} [${article.comment_cnt}]</a></td>
 	                <td>${article.nick}</td>
 	                <td>${article.wdate}</td>
 	                <td>${article.hit_cnt}</td>
 	            </tr>
+                <c:set var="currentPageStartNum" value="${currentPageStartNum-1}"/>
             </c:forEach>
         </table>
 
         <div class="page">
-            <a href="#" class="prev">이전</a>
+        	<c:if test="${pageGroupStart > 1}">
+            	<a href="/jboard/article/list.do?pg=${pageGroupStart-1}" class="prev">이전</a>
+            </c:if>
             <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}" >
-            	<a href="/jboard/article/list.do?pg=${num}" class="num">${num}</a>
+            	<a href="/jboard/article/list.do?pg=${num}" class="num ${currentPage == num ? 'current' : 'off'}">${num}</a>
             </c:forEach>
-            <a href="#" class="next">다음</a>
+            <c:if test="${pageGroupEnd < lastPageNum}">
+            	<a href="/jboard/article/list.do?pg=${pageGroupEnd+1}" class="next">다음</a>
+            </c:if>
         </div>
 
         <a href="/jboard/article/write.do" class="btn btnWrite">글쓰기</a>

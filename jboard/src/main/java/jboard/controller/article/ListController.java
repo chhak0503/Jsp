@@ -38,23 +38,28 @@ public class ListController extends HttpServlet {
 		}		
 	
 		// 현재 페이지 번호 시작값 구하기
-		int page = 1;
+		int currentPage = 1;
 		
 		if(pg != null) {
-			page = Integer.parseInt(pg);	
+			currentPage = Integer.parseInt(pg);	
 		}
 		
-		int start = (page - 1) * 10;
+		int start = (currentPage - 1) * 10;
 		
 		
 		// 현재 페이지 그룹 구하기
-		int currentPageGroup = (int) Math.ceil(page / 10.0);
+		int currentPageGroup = (int) Math.ceil(currentPage / 10.0);
 		int pageGroupStart = (currentPageGroup - 1) * 10 + 1;
 		int pageGroupEnd = currentPageGroup * 10;
 		
 		if(pageGroupEnd > lastPageNum) {
 			pageGroupEnd = lastPageNum;
-		}		
+		}
+		
+		// 현재 페이지 글 시작 번호 구하기
+		int currentPageStartNum = total - (currentPage - 1) * 10;
+		
+		
 		
 		// 글 목록 조회
 		List<ArticleDTO> dtoList = articleService.findAll(start);
@@ -64,6 +69,10 @@ public class ListController extends HttpServlet {
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", pageGroupStart);
 		req.setAttribute("pageGroupEnd", pageGroupEnd);
+		req.setAttribute("currentPageStartNum", currentPageStartNum);
+		req.setAttribute("total", total);
+		req.setAttribute("currentPage", currentPage);
+		
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/article/list.jsp");
