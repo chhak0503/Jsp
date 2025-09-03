@@ -25,8 +25,9 @@ public enum FileService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	
-	public void fileUpload(HttpServletRequest req) {
-				
+	public int fileUpload(HttpServletRequest req) {
+		
+		int count = 0;
 		
 		// 파일업로드 디렉터리 경로 생성
 		ServletContext ctx = req.getServletContext();
@@ -39,25 +40,32 @@ public enum FileService {
 				
 		try {
 			// 업로드 파일 Part(업로드된 파일) 첨부 파일에서 가져오기
-			Collection<Part> parts = req.getParts();
+			Collection<Part> parts = req.getParts();						
 			
 			for(Part part : parts) {
 				
-				// 파일명 추출
-				String oriName = part.getSubmittedFileName();
-				logger.debug("oriName : " + oriName);	
+				String partName = part.getName();
+				logger.debug("partName : " + partName);
 				
-				// 중복되지 않는 파일명 생성	
-				String ext = oriName.substring(oriName.lastIndexOf("."));	
-				String savedName = UUID.randomUUID().toString() + ext;
-				
-				// 파일 저장(경로 + 구분자 + 중복되지 않는 파일명)
-				part.write(path + File.separator + savedName);
-			}			
-			
+				if(partName.equals("file1") || partName.equals("file2")) {				
+					// 파일명 추출
+					String oriName = part.getSubmittedFileName();
+					logger.debug("oriName : " + oriName);
+					
+					// 중복되지 않는 파일명 생성
+					String ext = oriName.substring(oriName.lastIndexOf("."));
+					String savedName = UUID.randomUUID().toString() + ext;
+					
+					// 파일 저장(경로 + 구분자 + 중복되지 않는 파일명)
+					part.write(path + File.separator + savedName);
+					count++;
+				}
+			}
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		
+		return count;
 	}
 	
 	public void fileDownload() {}

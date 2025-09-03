@@ -42,11 +42,12 @@ public class WriteController extends HttpServlet {
 		String regip = req.getRemoteAddr();
 		
 		// 첨부파일 업로드
-		fileService.fileUpload(req);
+		int count = fileService.fileUpload(req);
 		
 		ArticleDTO dto = new ArticleDTO();
 		dto.setTitle(title);
 		dto.setContent(content);
+		dto.setFile_cnt(count);
 		dto.setWriter(writer);
 		dto.setReg_ip(regip);
 		

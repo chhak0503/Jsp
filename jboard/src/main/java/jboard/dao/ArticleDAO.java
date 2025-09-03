@@ -26,8 +26,9 @@ public class ArticleDAO extends DBHelper {
 			psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
-			psmt.setString(3, dto.getWriter());
-			psmt.setString(4, dto.getReg_ip());
+			psmt.setInt(3, dto.getFile_cnt());
+			psmt.setString(4, dto.getWriter());
+			psmt.setString(5, dto.getReg_ip());
 			psmt.executeUpdate();
 			closeAll();			
 		}catch (Exception e) {
