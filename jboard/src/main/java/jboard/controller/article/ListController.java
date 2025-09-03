@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jboard.dto.ArticleDTO;
+import jboard.dto.PagenationDTO;
 import jboard.service.ArticleService;
 
 @WebServlet("/article/list.do")
@@ -25,55 +26,16 @@ public class ListController extends HttpServlet {
 		// 요청 페이지 번호 수신
 		String pg = req.getParameter("pg");
 				
-		// 전체 게시물 갯수 구하기
-		int total = articleService.getCountTotal();
-		
-		// 마지막 페이지번호 구하기
-		int lastPageNum = 0;
-		
-		if(total % 10 == 0) {
-			lastPageNum = total / 10;	  // 10으로 나누어 떨어지면
-		}else {
-			lastPageNum = total / 10 + 1; // 10으로 나누어 떨어지지 않음
-		}		
-	
-		// 현재 페이지 번호 시작값 구하기
-		int currentPage = 1;
-		
-		if(pg != null) {
-			currentPage = Integer.parseInt(pg);	
-		}
-		
-		int start = (currentPage - 1) * 10;
-		
-		
-		// 현재 페이지 그룹 구하기
-		int currentPageGroup = (int) Math.ceil(currentPage / 10.0);
-		int pageGroupStart = (currentPageGroup - 1) * 10 + 1;
-		int pageGroupEnd = currentPageGroup * 10;
-		
-		if(pageGroupEnd > lastPageNum) {
-			pageGroupEnd = lastPageNum;
-		}
-		
-		// 현재 페이지 글 시작 번호 구하기
-		int currentPageStartNum = total - (currentPage - 1) * 10;
-		
-		
+		// 페이지네이션 처리 요청
+		PagenationDTO pagenationDTO = articleService.getPagenationDTO(pg);
 		
 		// 글 목록 조회
+		int start = pagenationDTO.getStart();
 		List<ArticleDTO> dtoList = articleService.findAll(start);
 		
 		// request 공유참조(JSP에서 출력)
 		req.setAttribute("dtoList", dtoList);
-		req.setAttribute("lastPageNum", lastPageNum);
-		req.setAttribute("pageGroupStart", pageGroupStart);
-		req.setAttribute("pageGroupEnd", pageGroupEnd);
-		req.setAttribute("currentPageStartNum", currentPageStartNum);
-		req.setAttribute("total", total);
-		req.setAttribute("currentPage", currentPage);
-		
-		
+		req.setAttribute("pagenationDTO", pagenationDTO);		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/article/list.jsp");
 		dispatcher.forward(req, resp);
