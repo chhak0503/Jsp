@@ -37,6 +37,10 @@ public class Sql {
 	
 	// comment
 	public static final String INSERT_COMMENT = "INSERT INTO TB_COMMENT (ANO, CONTENT, WRITER, REG_IP, WDATE) VALUES (?, ?, ?, ?, SYSDATE)";
+	public static final String SELECT_COMMENT_ALL = "SELECT C.*, U.NICK FROM TB_COMMENT C "
+													+ "JOIN TB_USER U ON C.WRITER = U.USID "
+													+ "WHERE ano=? ORDER BY CNO ASC";
+	
 	
 	// file
 	public static final String INSERT_FILE = "INSERT INTO TB_FILE (ANO, ONAME, SNAME, RDATE) VALUES (?, ?, ?, SYSDATE)";

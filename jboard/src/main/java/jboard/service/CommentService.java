@@ -19,8 +19,8 @@ public enum CommentService {
 	public CommentDTO findById(int cno) {
 		return dao.select(cno);
 	}
-	public List<CommentDTO> findAll() {
-		return dao.selectAll();
+	public List<CommentDTO> findAll(String ano) {
+		return dao.selectAll(ano);
 	}
 	public void modify(CommentDTO dto) {
 		dao.update(dto);

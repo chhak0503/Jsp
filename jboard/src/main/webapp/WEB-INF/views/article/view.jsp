@@ -40,6 +40,37 @@
 		}); // 댓글 입력 끝
 		
 		
+		// 댓글 목록 출력
+		const commentList = document.getElementsByClassName('commentList')[0];
+		const empty = commentList.getElementsByClassName('empty')[0];
+		
+		const ano = ${articleDTO.ano};
+			
+		fetch('/jboard/comment/list.do?ano='+ano)
+			.then(resp => resp.json())
+			.then(data => {
+				console.log(data);
+				
+				for(const comment of data){
+					const commentArticle = `<article>
+								                <span class="nick">\${comment.nick}</span>
+								                <span class="date">\${comment.wdate}</span>
+								                <p class="content">\${comment.content}</p>                        
+								                <div>
+								                    <a href="#" class="remove">삭제</a>
+								                    <a href="#" class="modify">수정</a>
+								                </div>
+								            </article>`;								            
+					
+					commentList.insertAdjacentHTML('beforeEnd', commentArticle);
+					empty.remove();
+				}
+			})
+			.catch(err => {
+				console.log(err);
+			});
+		
+		
 		
 	});
 
@@ -89,15 +120,6 @@
         <!-- 댓글목록 -->
         <section class="commentList">
             <h3>댓글목록</h3>
-            <article>
-                <span class="nick">길동이</span>
-                <span class="date">20-05-20</span>
-                <p class="content">댓글 샘플 입니다.</p>                        
-                <div>
-                    <a href="#" class="remove">삭제</a>
-                    <a href="#" class="modify">수정</a>
-                </div>
-            </article>
             <p class="empty">등록된 댓글이 없습니다.</p>
 		</section>
 		
