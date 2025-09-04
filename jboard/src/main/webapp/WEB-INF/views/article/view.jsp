@@ -15,7 +15,7 @@
                 <th>작성자</th>
                 <td><input type="text" name="writer" value="${articleDTO.writer}(${articleDTO.nick})" readonly/></td>
             </tr>
-            <c:if test="${empty articleDTO.files}">
+            <c:if test="${articleDTO.file_cnt > 0}">
 	            <tr>
 	                <th>파일</th>
 	                <td>
