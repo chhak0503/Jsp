@@ -26,12 +26,23 @@
 				.then(data => {
 					console.log(data);
 					
-					if(data.result > 0){
-						alert('댓글 입력 성공!');
-						
-						// 폼 초기화(입력했던 데이터 비우기)
-						formComment.reset();
-					}					
+					const commentArticle = `<article>
+								                <span class="nick">\${data.nick}</span>
+								                <span class="date">\${data.wdate}</span>
+								                <p class="content">\${data.content}</p>                        
+								                <div>
+								                    <a href="#" class="remove">삭제</a>
+								                    <a href="#" class="modify">수정</a>
+								                </div>
+								            </article>`;
+					
+		            commentList.insertAdjacentHTML('beforeEnd', commentArticle);
+					empty.remove();
+								            
+								            
+					// 폼 초기화(입력했던 데이터 비우기)
+					formComment.reset();
+										
 				})
 				.catch(err => {
 					console.log(err);

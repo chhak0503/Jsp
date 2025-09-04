@@ -21,23 +21,37 @@ public class CommentDAO extends DBHelper {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public int insert(CommentDTO dto) {
+	public CommentDTO insert(CommentDTO dto) {
 		
-		int rowCount = 0;
+		CommentDTO savedComment = null;
 		
 		try {
 			conn = getConnection();
+			conn.setAutoCommit(false);
 			psmt = conn.prepareStatement(Sql.INSERT_COMMENT);
 			psmt.setInt(1, dto.getAno());
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getWriter());
 			psmt.setString(4, dto.getReg_ip());
-			rowCount = psmt.executeUpdate();
+			psmt.executeUpdate();			
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(Sql.SELECT_COMMENT_LATEST);			
+			if(rs.next()) {
+				savedComment = new CommentDTO();
+				savedComment.setCno(rs.getInt(1));
+				savedComment.setAno(rs.getInt(2));
+				savedComment.setContent(rs.getString(3));
+				savedComment.setWriter(rs.getString(4));
+				savedComment.setReg_ip(rs.getString(5));
+				savedComment.setWdate(rs.getString(6));
+				savedComment.setNick(rs.getString(7));
+			}
+			conn.commit();
 			closeAll();			
 		}catch (Exception e) {
 			logger.error(e.getMessage());
-		}	
-		return rowCount;
+		}		
+		return savedComment;
 	}
 	
 	public CommentDTO select(int cno) {
