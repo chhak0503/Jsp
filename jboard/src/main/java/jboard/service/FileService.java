@@ -122,6 +122,11 @@ public enum FileService {
 	public void modify(FileDTO dto) {
 		dao.update(dto);
 	}	
+	
+	public void downloadCountPlus(String fno) {
+		dao.updateDownload(fno);
+	}
+	
 	public void remove(int fno) {
 		dao.delete(fno);
 	}
