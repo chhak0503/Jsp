@@ -6,6 +6,7 @@
 		
 		const formComment = document.formComment; // form 태그의 name 속성으로 문서객체 참조
 		
+		// 댓글 입력
 		formComment.addEventListener('submit', function(e){
 			e.preventDefault();
 			
@@ -27,14 +28,16 @@
 					
 					if(data.result > 0){
 						alert('댓글 입력 성공!');
-					}
-					
+						
+						// 폼 초기화(입력했던 데이터 비우기)
+						formComment.reset();
+					}					
 				})
 				.catch(err => {
 					console.log(err);
-				});	
+				});
 			
-		});
+		}); // 댓글 입력 끝
 		
 		
 		
