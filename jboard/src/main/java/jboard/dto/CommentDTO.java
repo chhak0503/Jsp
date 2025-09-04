@@ -18,9 +18,17 @@ public class CommentDTO {
 	public int getAno() {
 		return ano;
 	}
+	
 	public void setAno(int ano) {
 		this.ano = ano;
 	}
+	
+	public void setAno(String ano) {		
+		if(ano != null) {
+			this.ano = Integer.parseInt(ano);	
+		}		
+	}
+	
 	public String getContent() {
 		return content;
 	}
