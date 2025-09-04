@@ -38,7 +38,7 @@ public class Sql {
 	
 	// file
 	public static final String INSERT_FILE = "INSERT INTO TB_FILE (ANO, ONAME, SNAME, RDATE) VALUES (?, ?, ?, SYSDATE)";
-	
+	public final static String SELECT_FILE = "SELECT * FROM TB_FILE WHERE fno=?";
 	
 	
 	

@@ -15,12 +15,12 @@
                 <th>작성자</th>
                 <td><input type="text" name="writer" value="${articleDTO.writer}(${articleDTO.nick})" readonly/></td>
             </tr>
-            <c:if test="${articleDTO.file_cnt > 0}">
+            <c:if test="${articleDTO.file_cnt gt 0}">
 	            <tr>
 	                <th>파일</th>
 	                <td>
 	                	<c:forEach var="file" items="${articleDTO.files}">
-	                    	<p><a href="#">${file.oname}</a>&nbsp;<span>${file.download}</span>회 다운로드</p>
+	                    	<p><a href="/jboard/file/download.do?fno=${file.fno}">${file.oname}</a>&nbsp;<span>${file.download}</span>회 다운로드</p>
 	                    </c:forEach>
 	                </td>
 	            </tr>
