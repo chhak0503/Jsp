@@ -63,8 +63,7 @@ public class ArticleDAO extends DBHelper {
 	
 	public int selectCountTotal() {
 		
-		int total = 0;
-		
+		int total = 0;		
 		try {
 			conn = getConnection();			
 			stmt = conn.createStatement();
@@ -162,23 +161,58 @@ public class ArticleDAO extends DBHelper {
 		return dtoList;
 	}
 	
-	public List<ArticleDTO> selectArticleSearch(String searhType, String keyword) {
+	public int selectCountSearch(String searchType, String keyword) {
 		
-		List<ArticleDTO> dtoList = new ArrayList<ArticleDTO>();
-		StringBuilder sql = new StringBuilder(Sql.SELECT_ARTICLE_SEARCH);
+		int total = 0;
 		
-		if(searhType.equals("title")) {
+		StringBuilder sql = new StringBuilder(Sql.SELECT_COUNT_SEARCH);
+		
+		if(searchType.equals("title")) {
 			sql.append(Sql.SEARCH_WHERE_TITLE);
-		}else if(searhType.equals("content")) {
+		}else if(searchType.equals("content")) {
 			sql.append(Sql.SEARCH_WHERE_CONTENT);
-		}else if(searhType.equals("nick")) {
+		}else if(searchType.equals("nick")) {
 			sql.append(Sql.SEARCH_WHERE_NICK);
-		}		
+		}
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(sql.toString());
 			psmt.setString(1, "%" + keyword + "%");
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			closeAll();			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return total;
+	}
+	
+	public List<ArticleDTO> selectArticleSearch(int start, String searchType, String keyword) {
+		
+		List<ArticleDTO> dtoList = new ArrayList<ArticleDTO>();
+		StringBuilder sql = new StringBuilder(Sql.SELECT_ARTICLE_SEARCH);
+		
+		if(searchType.equals("title")) {
+			sql.append(Sql.SEARCH_WHERE_TITLE);
+		}else if(searchType.equals("content")) {
+			sql.append(Sql.SEARCH_WHERE_CONTENT);			
+		}else if(searchType.equals("nick")) {
+			sql.append(Sql.SEARCH_WHERE_NICK);			
+		}
+		sql.append(Sql.SEARCH_ORDER_ANO);
+		sql.append(Sql.SEARCH_OFFSET_ROW);
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setString(1, "%" + keyword + "%");
+			psmt.setInt(2, start);
 			
 			rs = psmt.executeQuery();
 			while(rs.next()) {

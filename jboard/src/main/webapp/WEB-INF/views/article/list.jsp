@@ -4,23 +4,11 @@
 <main id="article">
     <section class="list">
         <nav>
-            <h1>
-                전체 글목록
-                <span>${pagenationDTO.total}건</span>
-            </h1>
-            <form action="/jboard/article/search.do" method="get">
-                <select name="searchType">
-            		<option value="title">제목</option>
-            		<option value="content">내용</option>
-            		<option value="nick">글쓴이</option>
-            	</select>
-                <input type="text" name="keyword" placeholder="검색 키워드 입력">
-                <input type="submit" value="검색">
-            </form>
+            <h1>전체 글목록<span>${pagenationDTO.total}건</span></h1>
+            <jsp:include page="./_searchForm.jsp"></jsp:include>
         </nav>
-                        
-        <table border="0">                    
-            <tr>
+        <table border="0">
+        	<tr>
                 <th>번호</th>
                 <th>제목</th>
                 <th>글쓴이</th>
