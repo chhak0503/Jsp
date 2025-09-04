@@ -31,7 +31,9 @@ public class Sql {
 														+ "LEFT JOIN TB_FILE F ON A.ANO = F.ANO "
 														+ "WHERE A.ANO=?";
 	
-	public final static String SELECT_COUNT_SEARCH = "SELECT COUNT(*) FROM TB_ARTICLE ";
+	public final static String SELECT_COUNT_SEARCH = "SELECT COUNT(*) FROM TB_ARTICLE A "
+														+ "JOIN TB_USER U ON A.WRITER = U.USID ";
+	
 	public final static String SELECT_ARTICLE_SEARCH = "SELECT A.*, U.NICK FROM TB_ARTICLE A "
 														+ "JOIN TB_USER U ON A.WRITER = U.USID ";
 	
