@@ -1,9 +1,12 @@
 package jboard.controller.comment;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.JsonObject;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -39,10 +42,31 @@ public class WriteController extends HttpServlet {
 		dto.setReg_ip(regip);		
 		logger.debug(dto.toString());
 		
-		commentService.register(dto);
+		int result = commentService.register(dto);
 		
-		resp.sendRedirect("/jboard/article/view.do?ano="+ano+"&code="+ResultCode.COMMENT_SUCCESS.getCode());
+		//resp.sendRedirect("/jboard/article/view.do?ano="+ano+"&code="+ResultCode.COMMENT_SUCCESS.getCode());
+		// JSON 응답 데이터 생성
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		
+		// JSON 출력
+		PrintWriter out = resp.getWriter();
+		out.print(json);
+		
 		
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
