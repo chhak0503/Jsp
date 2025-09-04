@@ -31,6 +31,13 @@ public class Sql {
 														+ "LEFT JOIN TB_FILE F ON A.ANO = F.ANO "
 														+ "WHERE A.ANO=?";
 	
+	public final static String SELECT_ARTICLE_SEARCH = "SELECT A.*, U.NICK FROM TB_ARTICLE A "
+														+ "JOIN TB_USER U ON A.WRITER = U.USID ";
+	
+	public final static String SEARCH_WHERE_TITLE = "WHERE TITLE LIKE ?";
+	public final static String SEARCH_WHERE_CONTENT = "WHERE CONTENT LIKE ?";
+	public final static String SEARCH_WHERE_NICK = "WHERE NICK LIKE ?";
+	
 	
 	public static final String SELECT_MAX_ANO = "SELECT MAX(ANO) FROM TB_ARTICLE";
 	public static final String INSERT_ARTICLE = "INSERT INTO TB_ARTICLE (TITLE, CONTENT, FILE_CNT, WRITER, REG_IP, WDATE) VALUES (?, ?, ?, ?, ?, SYSDATE)";

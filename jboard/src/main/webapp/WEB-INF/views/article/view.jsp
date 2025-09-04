@@ -24,8 +24,7 @@
 			})
 				.then(response => response.json())
 				.then(data => {
-					console.log(data);
-					
+					console.log(data);					
 					const commentArticle = `<article>
 								                <span class="nick">\${data.nick}</span>
 								                <span class="date">\${data.wdate}</span>

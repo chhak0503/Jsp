@@ -58,22 +58,21 @@ public enum ArticleService {
 		dto.setPageGroupEnd(pageGroupEnd);
 		
 		return dto;
-	}	
-	
-	
-	
+	}
 	public int register(ArticleDTO dto) {
 		return dao.insert(dto);
-	}	
+	}
 	public int getCountTotal() {
 		return dao.selectCountTotal();
-	}
-	
+	}	
 	public ArticleDTO findAricleWithFile(String ano) {
 		return dao.selectArticleWithFile(ano);
 	}
 	public List<ArticleDTO> findAll(int start) {
 		return dao.selectAll(start);
+	}
+	public List<ArticleDTO> findAllSearch(String searchType, String keyword) {
+		return dao.selectArticleSearch(searchType, keyword);
 	}
 	public void modify(ArticleDTO dto) {
 		dao.update(dto);
