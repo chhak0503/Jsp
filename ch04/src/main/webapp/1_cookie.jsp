@@ -15,8 +15,6 @@
 			<input type="number" name="age" placeholder="나이 입력"><br>	
 			<input type="submit" value="전송">
 		</form>
-		
-		
 	
 	</body>
 </html>

@@ -4,7 +4,11 @@
 	session.removeAttribute("sessUser");
 	session.invalidate(); // 세션 종료
 	
-	// 로그인 폼 이동
-	response.sendRedirect("./loginForm.jsp?logout=success");
+	// 쿠키 삭제
+	Cookie cookie = new Cookie("auto", null);
+	cookie.setMaxAge(0); // 쿠키 수명을 0으로 해서 삭제	
+	response.addCookie(cookie);
 	
+	// 로그인 폼 이동
+	response.sendRedirect("./loginForm.jsp?logout=success");	
 %>
