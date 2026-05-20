@@ -7,7 +7,6 @@
 	</head>
 	<body>
 		<h3>쿠키 생성</h3>
-		
 		<%
 			// 전송 데이터 수신
 			String userid 	= request.getParameter("userid");
@@ -31,7 +30,6 @@
 			Cookie cookie4 = new Cookie("age", age);
 			cookie4.setPath("/"); 		// 쿠키 사용 범위
 			cookie4.setMaxAge(60 * 1); 	// 쿠키 수명
-			
 			
 			// 쿠키 전송
 			response.addCookie(cookie1);
