@@ -44,15 +44,4 @@
 	
 	// 목록 이동
 	response.sendRedirect("/ch05/user1/list.jsp?register=success");
-	
 %>
-
-
-
-
-
-
-
-
-
-
