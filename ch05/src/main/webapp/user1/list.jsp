@@ -80,7 +80,7 @@
 					<td><%= user1.getHp() %></td>
 					<td><%= user1.getAge() %></td>
 					<td>
-						<a href="#">수정</a>
+						<a href="/ch05/user1/modify.jsp?userid=<%= user1.getUserid() %>">수정</a>
 						<a href="#">삭제</a>
 					</td>
 				</tr>
