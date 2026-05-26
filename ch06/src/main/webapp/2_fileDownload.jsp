@@ -69,7 +69,7 @@
 					<td><%= file.getRdate() %></td>			
 					<td>
 						<a href="#">삭제</a>
-						<a href="#">다운</a>
+						<a href="./proc/fileDownload.jsp?no=<%= file.getNo() %>">다운</a>
 					</td>			
 				</tr>
 			<% } %>
