@@ -68,7 +68,7 @@
 					<td><%= file.getSfname() %></td>
 					<td><%= file.getRdate() %></td>			
 					<td>
-						<a href="#">삭제</a>
+						<a href="./proc/fileDelete.jsp?no=<%= file.getNo() %>">삭제</a>
 						<a href="./proc/fileDownload.jsp?no=<%= file.getNo() %>">다운</a>
 					</td>			
 				</tr>
