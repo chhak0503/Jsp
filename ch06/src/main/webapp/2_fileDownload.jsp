@@ -48,7 +48,7 @@
 	</head>
 	<body>
 		<h3>2.파일 다운로드 실습</h3>
-		
+		<a href="./1_fileUpload.jsp">파일 업로드 폼</a>
 		<table border="1">
 			<tr>
 				<th>번호</th>
