@@ -26,7 +26,7 @@
 	// Gmail SMTP 세션 생성
 	Session sess = Session.getInstance(props, new Authenticator(){
 		protected PasswordAuthentication getPasswordAuthentication(){			
-			final String APP_PASS = "lsyt hsyf nnfg abqu";			
+			final String APP_PASS = "앱비밀번호";			
 			return new PasswordAuthentication(sender, APP_PASS);
 		}
 	});
