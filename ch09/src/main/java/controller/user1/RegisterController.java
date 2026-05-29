@@ -1,4 +1,4 @@
-package controller;
+package controller.user1;
 
 import java.io.IOException;
 
@@ -9,26 +9,24 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/hello.do")
-public class HelloController extends HttpServlet {
+@WebServlet("/user1/register.do")
+public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// View 포워드(사용자에게 HTML 응답)
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/hello.jsp");
+		
+		// View forward
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user1/register.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	}
+	
 
 }
-
-
-
-
-
-
