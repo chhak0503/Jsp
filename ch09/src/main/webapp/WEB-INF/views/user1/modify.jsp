@@ -10,23 +10,23 @@
 		<a href="/ch09">메인</a>
 		<a href="/ch09/user1/list.do">목록</a>
 		
-		<form action="#" method="post">
+		<form action="/ch09/user1/modify.do" method="post">
 			<table border="1">
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="userid" value="" readonly></td>
+					<td><input type="text" name="userid" value="${requestScope.user1DTO.userid}" readonly></td>
 				</tr>
 				<tr>
 					<td>이름</td>
-					<td><input type="text" name="name" value=""></td>
+					<td><input type="text" name="name" value="${user1DTO.name}"></td>
 				</tr>
 				<tr>
 					<td>휴대폰</td>
-					<td><input type="text" name="hp" value=""></td>
+					<td><input type="text" name="hp" value="${user1DTO.hp}"></td>
 				</tr>
 				<tr>
 					<td>나이</td>
-					<td><input type="number" name="age" value=""></td>
+					<td><input type="number" name="age" value="${user1DTO.age}"></td>
 				</tr>
 				<tr>					
 					<td colspan="2" align="right">

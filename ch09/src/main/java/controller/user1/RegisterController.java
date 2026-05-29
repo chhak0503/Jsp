@@ -50,7 +50,6 @@ public class RegisterController extends HttpServlet {
 		
 		// 목록 리다이렉트
 		resp.sendRedirect("/ch09/user1/list.do?register=success");
-		
 	}
 	
 

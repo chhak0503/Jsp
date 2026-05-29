@@ -31,7 +31,7 @@
 					<td>${dto.hp}</td> 
 					<td>${dto.age}</td> 
 					<td>
-						<a href="#">수정</a>
+						<a href="/ch09/user1/modify.do?userid=${dto.userid}">수정</a>
 						<a href="#">삭제</a>							
 					</td> 
 				</tr>
