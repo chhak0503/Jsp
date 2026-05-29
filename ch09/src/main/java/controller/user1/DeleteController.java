@@ -22,7 +22,6 @@ public class DeleteController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		// 전송 데이터 수신
 		String userid = req.getParameter("userid");
 		System.out.println(userid);
