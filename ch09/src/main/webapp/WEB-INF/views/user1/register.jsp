@@ -11,7 +11,7 @@
 		<a href="/ch09">메인</a>
 		<a href="/ch09/user1/list.do">목록</a>
 		
-		<form action="#" method="post">
+		<form action="/ch09/user1/register.do" method="post">
 			<table border="1">
 				<tr>
 					<td>아이디</td>
