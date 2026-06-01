@@ -21,7 +21,7 @@ public class TermsControlle extends HttpServlet {
 		
 		// View 포워드
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/terms.jsp");
-		dispatcher.forward(req, resp);	
+		dispatcher.forward(req, resp);
 	}
 	
 	@Override
