@@ -8,12 +8,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.co.jboard.service.ArticleService;
+import kr.co.jboard.service.UserService;
 
 @WebServlet("/user/info.do")
 public class InfoControlle extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
+	// 서비스 가져오기(열거상수 객체)
+	private UserService service = UserService.INSTANCE;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
