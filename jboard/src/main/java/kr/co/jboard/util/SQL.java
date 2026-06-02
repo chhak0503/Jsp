@@ -42,9 +42,20 @@ public class SQL {
 	
 	// Terms
 	public static final String INSERT_TERMS = "";
-	public static final String SELECT_TERMS = "";
+	public static final String SELECT_TERMS = "SELECT * FROM Terms WHERE no=?";
 	public static final String SELECT_ALL_TERMS = "";
 	public static final String UPDATE_TERMS = "";
 	public static final String DELETE_TERMS = "";
 
 }
+
+
+
+
+
+
+
+
+
+
+

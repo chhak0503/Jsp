@@ -42,8 +42,10 @@ public class ArticleDAO extends DBHelper {
 				dto.setWriter(rs.getString(8));
 				dto.setRegip(rs.getString(9));
 				dto.setWdate(rs.getString(10));
-			}			
+			}
+			
 			closeAll();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

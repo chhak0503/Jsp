@@ -18,8 +18,8 @@ public enum TermsService {
 		dao.insert(dto);
 	}
 	
-	public TermsDTO findById(String ano) {
-		return dao.select(ano);
+	public TermsDTO findById(int no) {
+		return dao.select(no);
 	}
 	
 	public List<TermsDTO> findAll() {
@@ -30,7 +30,7 @@ public enum TermsService {
 		dao.update(dto);
 	}
 	
-	public void remove(String ano) {
-		dao.delete(ano);
+	public void remove(int no) {
+		dao.delete(no);
 	}
 }

@@ -17,7 +17,7 @@ public class TermsDAO extends DBHelper {
 	private TermsDAO() {}
 	
 	// 기본 CRUD 메서드
-	public TermsDTO select(String no) {
+	public TermsDTO select(int no) {
 		
 		// 반환용 DTO
 		TermsDTO dto = null;
@@ -25,11 +25,15 @@ public class TermsDAO extends DBHelper {
 		try {
 			conn = getConnection();						
 			psmt = conn.prepareStatement(SQL.SELECT_TERMS);
+			psmt.setInt(1, no);
 			
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
 				dto = new TermsDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setBasic(rs.getString(2));
+				dto.setPrivacy(rs.getString(3));
 			}			
 			closeAll();
 		} catch (Exception e) {
@@ -81,7 +85,7 @@ public class TermsDAO extends DBHelper {
 		}
 	}
 
-	public void delete(String no) {
+	public void delete(int no) {
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.DELETE_TERMS);
