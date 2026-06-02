@@ -69,7 +69,16 @@ public class UserDAO extends DBHelper {
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.INSERT_USER);
-			
+			psmt.setString(1, dto.getUserid());
+			psmt.setString(2, dto.getPass());
+			psmt.setString(3, dto.getName());
+			psmt.setString(4, dto.getNick());
+			psmt.setString(5, dto.getEmail());
+			psmt.setString(6, dto.getHp());
+			psmt.setString(7, dto.getZip());
+			psmt.setString(8, dto.getAddr1());
+			psmt.setString(9, dto.getAddr2());
+			psmt.setString(10, dto.getRegip());			
 			psmt.executeUpdate();
 			closeAll();
 		}catch (Exception e) {

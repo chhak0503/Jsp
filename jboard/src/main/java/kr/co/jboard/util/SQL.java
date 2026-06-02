@@ -20,7 +20,18 @@ public class SQL {
 	public static final String DELETE_ARTICLE = "DELETE FROM Article WHERE ano=?";
 	
 	// User
-	public static final String INSERT_USER = "";
+	public static final String INSERT_USER = "INSERT INTO User SET "
+												+ "userid=?,"
+												+ "pass=SHA2(?, 256),"
+												+ "name=?,"
+												+ "nick=?,"
+												+ "email=?,"
+												+ "hp=?,"
+												+ "zip=?,"
+												+ "addr1=?,"
+												+ "addr2=?,"
+												+ "regip=?,"
+												+ "regDate=NOW()";
 	public static final String SELECT_USER = "";
 	public static final String SELECT_ALL_USER = "";
 	public static final String UPDATE_USER = "";
