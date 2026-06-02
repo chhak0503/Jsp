@@ -11,11 +11,11 @@
         <%@ include file="./_head.jsp" %>
         <main id="user">
             <section class="login">
-                <form action="../article/list.html">                    
+                <form action="/jboard/user/login.do" method="post">                    
                     <table border="0">
                         <tr>
                             <td><img src="../images/login_ico_id.png" alt="아이디"/></td>
-                            <td><input type="text" name="uid" placeholder="아이디 입력"/></td>
+                            <td><input type="text" name="userid" placeholder="아이디 입력"/></td>
                         </tr>
                         <tr>
                             <td><img src="../images/login_ico_pw.png" alt="비밀번호"/></td>

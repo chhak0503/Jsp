@@ -33,6 +33,7 @@ public class SQL {
 												+ "regip=?,"
 												+ "regDate=NOW()";
 	public static final String SELECT_USER = "";
+	public static final String SELECT_USER_WITH_PASS = "SELECT * FROM User WHERE userid=? AND pass=SHA2(?, 256)";
 	public static final String SELECT_ALL_USER = "";
 	public static final String UPDATE_USER = "";
 	public static final String DELETE_USER = "";
