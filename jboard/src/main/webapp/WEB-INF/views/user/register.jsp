@@ -35,26 +35,38 @@
 								
 				if(!isUseridOk){
 					e.preventDefault();	
+					alert('아이디를 확인하세요.');
+					return;
 				}
 				
 				if(!isPassOk){
 					e.preventDefault();	
+					alert('비밀번호를 확인하세요.');
+					return;
 				}
 				
 				if(!isNameOk){
 					e.preventDefault();	
+					alert('이름를 확인하세요.');
+					return;
 				}
 				
 				if(!isNickOk){
 					e.preventDefault();	
+					alert('별명을 확인하세요.');
+					return;
 				}
 				
 				if(!isEmailOk){
 					e.preventDefault();	
+					alert('이메일을 확인하세요.');
+					return;
 				}
 				
 				if(!isHpOk){
 					e.preventDefault();	
+					alert('휴대폰을 확인하세요.');
+					return;
 				}				
 			});			
 			
@@ -108,7 +120,10 @@
 					passResult.innerText = '비밀번호가 유효하지 않습니다.';
 					passResult.style.color = 'red';
 					return;
+				}else {
+					passResult.innerText = '';
 				}
+				
 			});
 			
 			pass2.addEventListener('focusout', function(e){
