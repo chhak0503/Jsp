@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="../css/style.css"/>
     <script src="//t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/jboard/js/daumPostcode.js"></script>
-	<script>
-	
+	<script>	
 		// 유효성 검사에 사용할 정규표현식
 		const reUserid   = /^[a-z]+[a-z0-9]{4,19}$/g;
 		const rePass  = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{5,16}$/;
