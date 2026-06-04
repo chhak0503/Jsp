@@ -13,17 +13,19 @@
 			
 			const form = document.getElementsByTagName('form')[0];
 			
+			//--------------------------
 			// 아이디 중복확인
+			//--------------------------
 			const btnUserid = document.getElementById('btnUserid');
 			const useridResult = document.getElementsByClassName('useridResult')[0];
 			
 			btnUserid.addEventListener('click', async function(e){
 				e.preventDefault();
 				
-				const userid = form.userid.value;
+				const value = form.userid.value;
 				
-				// 아이디 중요여부 요청하기
-				const response = await fetch('/jboard/user/check.do?userid=' + userid);
+				// 아이디 중복 여부 요청하기
+				const response = await fetch('/jboard/user/check.do?type=userid&value=' + value);
 				const data = await response.json();				
 				console.log(data);
 				
@@ -33,13 +35,38 @@
 				}else{
 					useridResult.innerText = '사용 가능한 아이디 입니다.';
 					useridResult.style.color = 'green';
-				}
+				}				
+			}); // 아이디 중복 체크 끝
+			
+			
+			//--------------------------
+			// 별명 중복확인
+			//--------------------------
+			const btnNick = document.getElementById('btnNick');
+			const nickResult = document.getElementsByClassName('nickResult')[0];
+			
+			btnNick.addEventListener('click', async function(e){
+				e.preventDefault();
 				
-			});
+				const value = form.nick.value;
+				
+				// 별명 중복 여부 요청하기
+				const response = await fetch('/jboard/user/check.do?type=nick&value=' + value);
+				const data = await response.json();				
+				console.log(data);
+				
+				if(data.count > 0){
+					nickResult.innerText = '이미 사용중인 별명 입니다.';
+					nickResult.style.color = 'red';
+				}else{
+					nickResult.innerText = '사용 가능한 별명 입니다.';
+					nickResult.style.color = 'green';
+				}				
+			}); // 별명 중복 체크 끝
+			
 			
 			
 		});
-	
 	
 	</script>
 	
@@ -83,7 +110,7 @@
                             <td>
                                 <p class="nickInfo">공백없는 한글, 영문, 숫자 입력</p>
                                 <input type="text" name="nick" placeholder="별명 입력"/>
-                                <button type="button"><img src="../images/chk_id.gif" alt="중복확인"/></button>
+                                <button type="button" id="btnNick"><img src="../images/chk_id.gif" alt="중복확인"/></button>
                                 <span class="nickResult"></span>
                             </td>
                         </tr>

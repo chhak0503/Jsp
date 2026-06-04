@@ -34,7 +34,12 @@ public class SQL {
 												+ "regDate=NOW()";
 	
 	public static final String SELECT_USER = "";
-	public static final String SELECT_COUNT_USER = "SELECT COUNT(*) FROM User WHERE userid=?";	
+	public static final String SELECT_COUNT_USER = "SELECT COUNT(*) FROM User ";
+	public static final String WHERE_USERID = "WHERE userid=?";
+	public static final String WHERE_NICK = "WHERE nick=?";
+	
+	
+	
 	public static final String SELECT_USER_WITH_PASS = "SELECT * FROM User WHERE userid=? AND pass=SHA2(?, 256)";
 	public static final String SELECT_ALL_USER = "";
 	public static final String UPDATE_USER = "";

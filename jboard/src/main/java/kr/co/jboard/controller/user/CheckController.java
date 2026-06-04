@@ -25,11 +25,12 @@ public class CheckController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		// 전송 데이터 수신
-		String userid = req.getParameter("userid");
-		System.out.println(userid);
+		String type = req.getParameter("type");
+		String value = req.getParameter("value");
+		System.out.println(type);
 		
 		// 아이디 중복여부 조회
-		int count = service.getCountById(userid);
+		int count = service.getCount(type, value);
 		System.out.println(count);
 		
 		// 결과용 JSON 생성
