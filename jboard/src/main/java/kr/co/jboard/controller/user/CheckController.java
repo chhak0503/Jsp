@@ -29,9 +29,14 @@ public class CheckController extends HttpServlet {
 		String value = req.getParameter("value");
 		System.out.println(type);
 		
-		// 아이디 중복여부 조회
+		// 중복여부 조회
 		int count = service.getCount(type, value);
 		System.out.println(count);
+		
+		// 이메일 인증코드 전송
+		if(type.equals("email") && count < 1) {
+			service.sendEmailCode(value);
+		}
 		
 		// 결과용 JSON 생성
 		JsonObject json = new JsonObject();

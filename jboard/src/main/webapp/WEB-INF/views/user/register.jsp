@@ -65,6 +65,36 @@
 			}); // 별명 중복 체크 끝
 			
 			
+			//--------------------------
+			// 이메일 인증 확인(중복체크 포함)
+			//--------------------------
+			const btnEmail = document.getElementById('btnEmail');
+			const btnConfirm = document.getElementById('btnConfirm');
+			const emailResult = document.getElementsByClassName('emailResult')[0];
+			
+			btnEmail.addEventListener('click', async function(e){
+				e.preventDefault();
+				
+				const value = form.email.value;
+				
+				// 이메일 인증코드 요청하기(중복여부 검사 포함)
+				const response = await fetch('/jboard/user/check.do?type=email&value='+value);
+				const data = await response.json();
+				console.log(data);
+				
+				if(data.count > 0){
+					emailResult.innerText = '이미 사용중인 이메일 입니다.';
+					emailResult.style.color = 'red';
+				}else{
+					emailResult.innerText = '이메일 인증코드를 확인 하세요.';
+					emailResult.style.color = 'green';
+				}
+				
+			});
+			
+			
+			
+			
 			
 		});
 	
@@ -118,10 +148,11 @@
                             <td>이메일</td>
                             <td>
                                 <input type="email" name="email" placeholder="이메일 입력"/>
-                                <button type="button"><img src="../images/chk_auth.gif" alt="인증번호 받기"/></button>
+                                <button type="button" id="btnEmail"><img src="../images/chk_auth.gif" alt="인증번호 받기"/></button>
+                                <span class="emailResult"></span>
                                 <div class="auth">
                                     <input type="text" name="auth" placeholder="인증번호 입력"/>
-                                    <button type="button"><img src="../images/chk_confirm.gif" alt="확인"/></button>
+                                    <button type="button" id="btnConfirm"><img src="../images/chk_confirm.gif" alt="확인"/></button>
                                 </div>
                             </td>
                         </tr>
