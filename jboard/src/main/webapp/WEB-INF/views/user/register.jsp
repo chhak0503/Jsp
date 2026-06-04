@@ -70,12 +70,23 @@
 			//--------------------------
 			const btnEmail = document.getElementById('btnEmail');
 			const btnConfirm = document.getElementById('btnConfirm');
+			const auth = document.getElementsByClassName('auth')[0];			
 			const emailResult = document.getElementsByClassName('emailResult')[0];
+			
+			let preventDblClick = false; // 이중 클릭 방지 상태 변수
 			
 			btnEmail.addEventListener('click', async function(e){
 				e.preventDefault();
 				
-				const value = form.email.value;
+				// 이중 클릭 방지
+				if(preventDblClick){
+					return;
+				}
+				
+				preventDblClick = true;
+				console.log('이중 클릭 방지!!!');
+				
+				const value = form.email.value;				
 				
 				// 이메일 인증코드 요청하기(중복여부 검사 포함)
 				const response = await fetch('/jboard/user/check.do?type=email&value='+value);
@@ -88,7 +99,40 @@
 				}else{
 					emailResult.innerText = '이메일 인증코드를 확인 하세요.';
 					emailResult.style.color = 'green';
+					auth.style.display = 'block'; // 인증코드 입력필드 노출					
 				}
+				
+			});
+			
+			
+			// 인증코드 확인버튼 클릭			
+			btnConfirm.addEventListener('click', async function(e){
+				e.preventDefault();
+				
+				const value = form.code.value;
+				
+				// formData 생성
+				const formData = new FormData();
+				formData.append('code', value);
+				
+				
+				// 이메일 인증코드 전송하기(인증코드 검증)
+				const response = await fetch('/jboard/user/check.do', {
+												method: 'POST',
+												body: formData,
+											});
+				const data = await response.json();
+				console.log(data);
+				
+				if(data.count > 0){
+					emailResult.innerText = '인증코드가 잘못 되었습니다.';
+					emailResult.style.color = 'red';
+				}else{
+					emailResult.innerText = '이메일이 인증 되었습니다.';
+					emailResult.style.color = 'green';					
+				}
+				
+				
 				
 			});
 			
@@ -151,7 +195,7 @@
                                 <button type="button" id="btnEmail"><img src="../images/chk_auth.gif" alt="인증번호 받기"/></button>
                                 <span class="emailResult"></span>
                                 <div class="auth">
-                                    <input type="text" name="auth" placeholder="인증번호 입력"/>
+                                    <input type="text" name="code" placeholder="인증번호 입력"/>
                                     <button type="button" id="btnConfirm"><img src="../images/chk_confirm.gif" alt="확인"/></button>
                                 </div>
                             </td>
