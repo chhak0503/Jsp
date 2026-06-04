@@ -1,8 +1,7 @@
-package kr.co.jboard.controller.user;
+package kr.co.jboard.controller;
 
 import java.io.IOException;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,26 +9,34 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.jboard.dto.UserDTO;
-import kr.co.jboard.service.UserService;
 
-@WebServlet("/user/logout.do")
-public class LogoutControlle extends HttpServlet {
+@WebServlet(urlPatterns = {"/", "/index.do"})
+public class IndexController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-			
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// 로그아웃 처리
+		// 로그인 여부에 따라 로그인, 글목록 이동
 		HttpSession session = req.getSession();
-		session.removeAttribute("sessUser");
-		session.invalidate();		
+		UserDTO userDTO = (UserDTO) session.getAttribute("sessUser");
 		
-		// 로그인 이동
-		resp.sendRedirect("/jboard/user/login.do?logout=success");
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	}
+		if(userDTO != null) {			
+			// 글목록 이동
+			resp.sendRedirect("/jboard/article/list.do");			
+		}else {
+			// 로그인 이동
+			resp.sendRedirect("/jboard/user/login.do");			
+		}
+	}	
 }
+
+
+
+
+
+
+
+
+
