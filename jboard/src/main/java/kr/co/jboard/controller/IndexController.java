@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.jboard.dto.UserDTO;
 
-@WebServlet(urlPatterns = {"/", "/index.do"})
+@WebServlet(urlPatterns = {"/index.do"})
 public class IndexController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -22,7 +22,7 @@ public class IndexController extends HttpServlet {
 		HttpSession session = req.getSession();
 		UserDTO userDTO = (UserDTO) session.getAttribute("sessUser");
 		
-		if(userDTO != null) {			
+		if(userDTO != null) {
 			// 글목록 이동
 			resp.sendRedirect("/jboard/article/list.do");			
 		}else {

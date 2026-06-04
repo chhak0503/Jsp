@@ -18,6 +18,10 @@ public enum UserService {
 		dao.insert(dto);
 	}
 	
+	public int getCountById(String userid) {
+		return dao.selectCount(userid);
+	}
+	
 	public UserDTO findById(String userid) {
 		return dao.select(userid);
 	}
