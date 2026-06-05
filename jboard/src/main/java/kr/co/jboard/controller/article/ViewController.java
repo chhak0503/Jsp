@@ -25,8 +25,8 @@ public class ViewController extends HttpServlet {
 		String page = req.getParameter("page");
 		String ano = req.getParameter("ano");
 		
-		// 해당 글 조회후 업데이트하기
-		service.plusHit(ano);
+		// 해당 글 조회수 카운트 1 증가하기
+		service.increaseHitCount(ano);
 		
 		// 조회글 가져오기
 		ArticleDTO articleDTO = service.findById(ano);

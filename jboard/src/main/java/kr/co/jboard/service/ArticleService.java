@@ -80,7 +80,7 @@ public enum ArticleService {
 	public void modify(ArticleDTO dto) {
 		dao.update(dto);
 	}
-	public void plusHit(String ano) {
+	public void increaseHitCount(String ano) {
 		dao.updateHit(ano);
 	}
 	
