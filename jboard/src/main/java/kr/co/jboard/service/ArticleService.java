@@ -14,6 +14,10 @@ public enum ArticleService {
 	private ArticleDAO dao = ArticleDAO.getInstance();
 	
 	// DAO 호출 서비스 메서드
+	public int getCount() {
+		return dao.selectCount();
+	}
+	
 	public int register(ArticleDTO dto) {
 		return dao.insert(dto);
 	}

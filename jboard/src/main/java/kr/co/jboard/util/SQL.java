@@ -15,6 +15,7 @@ public class SQL {
 	public static final String SELECT_ARTICLE = "SELECT * FROM Article WHERE ano=?";
 	
 	public static final String SELECT_MAX_ANO = "SELECT MAX(ano) FROM Article";
+	public static final String SELECT_COUNT_ARTICLE = "SELECT COUNT(*) FROM Article";
 	
 	
 	
