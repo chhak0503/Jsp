@@ -14,16 +14,29 @@
             <section class="list">
                 <nav>
                     <h1>
-                        검색 건수 글목록
+                    	<a href="/jboard/article/list.do">[전체 글목록]</a>
+                        검색 건수
                         <span>${total}건</span>
                     </h1>
                     <form action="/jboard/article/search.do">
-                        <select name="searchType">
-                    		<option value="title">제목</option>
-                    		<option value="content">내용</option>
-                    		<option value="writer">글쓴이</option>
+                        <select name="searchType">                        
+                        	<c:if test="${searchType eq 'title'}">
+	                    		<option value="title" selected>제목</option>
+	                    		<option value="content">내용</option>
+	                    		<option value="writer">글쓴이</option>
+                    		</c:if>
+                    		<c:if test="${searchType eq 'content'}">
+	                    		<option value="title">제목</option>
+	                    		<option value="content" selected>내용</option>
+	                    		<option value="writer">글쓴이</option>
+                    		</c:if>
+                    		<c:if test="${searchType eq 'writer'}">
+	                    		<option value="title">제목</option>
+	                    		<option value="content">내용</option>
+	                    		<option value="writer" selected>글쓴이</option>
+                    		</c:if>
                     	</select>
-                        <input type="text" name="keyword" placeholder="검색 키워드 입력">
+                        <input type="text" name="keyword" value="${keyword}" placeholder="검색 키워드 입력">
                         <input type="submit" value="검색">
                     </form>
                 </nav>
