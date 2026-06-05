@@ -20,7 +20,9 @@ public class SQL {
 	
 	public static final String SELECT_ALL_ARTICLE = "SELECT a.*, u.nick FROM Article AS a "
 													+ "JOIN User AS u "
-													+ "ON a.writer = u.userid";
+													+ "ON a.writer = u.userid "
+													+ "ORDER BY ano DESC "
+													+ "LIMIT ?, 10";
 	
 	public static final String UPDATE_ARTICLE = "UPDATE Article SET "
 															+ "title=?,"

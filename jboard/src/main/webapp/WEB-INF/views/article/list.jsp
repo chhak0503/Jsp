@@ -41,7 +41,7 @@
 	                        <td>${dto.ano}</td>
 	                        <td><a href="#">${dto.title}[${dto.comment}]</a></td>
 	                        <td>${dto.nick}</td>
-	                        <td>${dto.wdate}</td>
+	                        <td>${dto.wdate}</td><!-- dto.getWdate() 호출 -->
 	                        <td>${dto.hit}</td>
 	                    </tr>
                     </c:forEach>
@@ -54,9 +54,7 @@
                     <a href="#" class="num">3</a>
                     <a href="#" class="next">다음</a>
                 </div>
-
-                <a href="/jboard/article/write.do" class="btn btnWrite">글쓰기</a>
-                
+                <a href="/jboard/article/write.do" class="btn btnWrite">글쓰기</a>                
             </section>
         </main>
         <%@ include file="./_tail.jsp" %>

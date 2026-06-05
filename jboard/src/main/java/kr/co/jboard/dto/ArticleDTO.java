@@ -80,8 +80,9 @@ public class ArticleDTO {
 		this.regip = regip;
 	}
 	public String getWdate() {
-		return wdate;
+		return wdate.substring(2, 16);
 	}
+	
 	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}

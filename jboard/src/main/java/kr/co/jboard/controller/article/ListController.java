@@ -23,8 +23,10 @@ public class ListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		int start = 0;
+		
 		// 글 목록 조회하기
-		List<ArticleDTO> dtoList = service.findAll();
+		List<ArticleDTO> dtoList = service.findAll(start);
 		
 		// View 공유 참조
 		req.setAttribute("dtoList", dtoList);
