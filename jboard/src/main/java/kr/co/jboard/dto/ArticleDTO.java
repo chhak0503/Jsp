@@ -1,5 +1,7 @@
 package kr.co.jboard.dto;
 
+import java.util.List;
+
 public class ArticleDTO {
 	
 	// Article 테이블 속성 확인
@@ -16,6 +18,8 @@ public class ArticleDTO {
 	
 	// 추가 필드
 	private String nick;
+	private List<FileDTO> fileList;
+	
 	
 	// 검색용 추가필드
 	private String searchType;
@@ -43,6 +47,12 @@ public class ArticleDTO {
 		this.nick = nick;
 	}
 	
+	public List<FileDTO> getFileList() {
+		return fileList;
+	}
+	public void setFileList(List<FileDTO> fileList) {
+		this.fileList = fileList;
+	}
 	
 	public int getAno() {
 		return ano;
