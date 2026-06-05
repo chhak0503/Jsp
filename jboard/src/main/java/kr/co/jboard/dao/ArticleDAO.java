@@ -1,5 +1,6 @@
 package kr.co.jboard.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,6 +110,12 @@ public class ArticleDAO extends DBHelper {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
+			
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 		return ano;
