@@ -1,6 +1,7 @@
 package kr.co.jboard.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +21,10 @@ public enum FileService {
 	private FileDAO dao = FileDAO.getInstance();
 	
 	// 파일 업로드
-	public void upload(HttpServletRequest request) {
+	public List<FileDTO> upload(HttpServletRequest request) {
+		
+		// 반환용 파일 리스트 생성
+		List<FileDTO> dtoList = new ArrayList<>(); 
 		
 		// 파일 업로드 디렉터리 경로 구하기
 		ServletContext ctx = request.getServletContext();
@@ -56,6 +60,12 @@ public enum FileService {
 					
 					// 파일 저장
 					part.write(uploadPath + File.separator + sfName);
+					
+					// 반환용 FileDTO 생성 및 리스트 저장
+					FileDTO fileDTO = new FileDTO();
+					fileDTO.setOfname(ofName);
+					fileDTO.setSfname(sfName);
+					dtoList.add(fileDTO);
 				}
 				
 			}
@@ -63,7 +73,7 @@ public enum FileService {
 			e.printStackTrace();
 		}
 		
-		
+		return dtoList;
 		
 	}
 	
