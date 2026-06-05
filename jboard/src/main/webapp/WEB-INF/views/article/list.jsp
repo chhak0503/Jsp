@@ -51,7 +51,7 @@
                     <a href="#" class="prev">이전</a>
                     
                     <c:forEach var="i" begin="1" end="${lastPageNum}">
-                    	<a href="#" class="num">${i}</a>
+                    	<a href="/jboard/article/list.do?page=${i}" class="num ${currentPage == i ? 'current' : ''}">${i}</a>
                     </c:forEach>
                     
                     <a href="#" class="next">다음</a>
