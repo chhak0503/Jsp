@@ -7,6 +7,7 @@ public class SQL {
 															+ "type='free',"
 															+ "title=?,"
 															+ "content=?,"																			
+															+ "file=?,"																			
 															+ "writer=?,"
 															+ "regip=?,"
 															+ "wdate=NOW()";
