@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.jboard.dto.ArticleDTO;
 import kr.co.jboard.service.ArticleService;
+import kr.co.jboard.service.FileService;
 
 @WebServlet("/article/write.do")
 public class WriteController extends HttpServlet {
@@ -18,6 +19,7 @@ public class WriteController extends HttpServlet {
 	
 	// 서비스 가져오기(열거상수 객체)
 	private ArticleService service = ArticleService.INSTANCE;
+	private FileService fileService = FileService.INSTANCE;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,7 +44,10 @@ public class WriteController extends HttpServlet {
 		dto.setTitle(title);
 		dto.setContent(content);
 		dto.setWriter(writer);
-		dto.setRegip(regip);		
+		dto.setRegip(regip);
+		
+		// 파일 업로드 처리
+		fileService.upload(req);
 		
 		// 등록 서비스 요청
 		service.register(dto);	
