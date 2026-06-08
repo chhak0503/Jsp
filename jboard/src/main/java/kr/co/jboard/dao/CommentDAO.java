@@ -64,6 +64,10 @@ public class CommentDAO extends DBHelper {
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.INSERT_COMMENT);
+			psmt.setInt(1, dto.getParent());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getWriter());
+			psmt.setString(4, dto.getRegip());
 			psmt.executeUpdate();
 			closeAll();
 		}catch (Exception e) {
